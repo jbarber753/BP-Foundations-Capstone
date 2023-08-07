@@ -1,11 +1,58 @@
-const button = document.getElementById(`button`);
 const qbTable = document.getElementById(`qb-table`);
 const rbTable = document.getElementById(`rb-table`);
 const wrTable = document.getElementById(`wr-table`);
 const teTable = document.getElementById(`te-table`);
 const kTable = document.getElementById(`k-table`);
+const dropDown = document.getElementById(`position-select`);
 
-const baseURL = `http://localhost:4000`
+const baseURL = `http://localhost:4000`;
+
+const renderTable = () => {
+    console.log(dropDown.value)
+    switch (dropDown.value){
+        case `qb`:
+            qbTable.style.display = `table`;
+            rbTable.style.display = `none`;
+            wrTable.style.display = `none`;
+            teTable.style.display = `none`;
+            kTable.style.display = `none`;
+            break;
+        case `rb`:
+            qbTable.style.display = `none`;
+            rbTable.style.display = `table`;
+            wrTable.style.display = `none`;
+            teTable.style.display = `none`;
+            kTable.style.display = `none`;
+            break;
+        case `wr`:
+            qbTable.style.display = `none`;
+            rbTable.style.display = `none`;
+            wrTable.style.display = `table`;
+            teTable.style.display = `none`;
+            kTable.style.display = `none`;
+            break;
+        case `te`:
+            qbTable.style.display = `none`;
+            rbTable.style.display = `none`;
+            wrTable.style.display = `none`;
+            teTable.style.display = `table`;
+            kTable.style.display = `none`;
+            break;
+        case `k`:
+            qbTable.style.display = `none`;
+            rbTable.style.display = `none`;
+            wrTable.style.display = `none`;
+            teTable.style.display = `none`;
+            kTable.style.display = `table`;
+            break;
+    //     default:
+    //         qbTable.style.display = `table`;
+    //         rbTable.style.display = `none`;
+    //         wrTable.style.display = `none`;
+    //         teTable.style.display = `none`;
+    //         kTable.style.display = `none`;
+    }
+}
 
 const displayQBs = () => {
     axios.get(`${baseURL}/quarterbacks`)
@@ -183,3 +230,6 @@ displayRBs();
 displayWRs();
 displayTEs();
 displayKs();
+
+console.log(dropDown.value)
+dropDown.addEventListener(`change`, renderTable);

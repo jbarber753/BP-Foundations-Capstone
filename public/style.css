@@ -1,3 +1,60 @@
+body{
+    margin: 0;
+}
+
+header{
+    font-family: 'Teko', sans-serif;
+    font-size: 48px;
+    font-style: italic;
+    color: white;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+nav{
+    font-size: 24px;
+    font-style: normal;
+}
+
+a{
+    margin-right: 30px;
+}
+
+#position-select{
+    font-size: 24px;
+    margin: 10px 0 10px 10px;
+}
+
+table{
+    margin-left: 10px;
+    border-collapse: collapse;
+    /* border-spacing: 20px; */
+}
+  
+tr {
+    border-bottom: 1pt solid lightgray;
+}
+
+tr:nth-child(even){
+    background-color: rgb(255, 227, 227);
+}
+
 td{
-    border: solid black 1px;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+th{
+    padding: 0 20px;
+}
+
+td, th{
+    text-align: center;
+}
+
+#rb-table, #wr-table, #te-table, #k-table{
+    display: none;
 }

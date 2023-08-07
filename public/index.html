@@ -4,12 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap');</style>
     <title>Judah's Fantasy Football Database</title>
 </head>
 <body>
-    <header></header>
-    <h1>Quarterbacks</h1>
-    <!-- <button id="button">Press me</button> -->
+    <header>Mock League Fantasy Football
+        <nav>
+            <a>2023 Projections</a>
+            <a>Depth Chart Projections</a>
+            <a>Your Team</a>
+            <a>Log Out</a>
+        </nav>
+    </header>
+    <select id="position-select">
+        <option value="qb">Quarterbacks</option>
+        <option value="rb">Running Backs</option>
+        <option value="wr">Wide Receivers</option>
+        <option value="te">Tight Ends</option>
+        <option value="k">Kickers</option>
+    </select>
     <table id="qb-table">
         <thead>
             <th></th>
@@ -24,7 +37,6 @@
             <th>Rushing Touchdowns</th>
         </thead>
     </table>
-    <h1>Running Backs</h1>
     <table id="rb-table">
         <thead>
             <th></th>
@@ -38,7 +50,6 @@
             <th>Touchdowns</th>
         </thead>
     </table>
-    <h1>Wide Receivers</h1>
     <table id="wr-table">
         <thead>
             <th></th>
@@ -52,7 +63,6 @@
             <th>Touchdowns</th>
         </thead>
     </table>
-    <h1>Tight Ends</h1>
     <table id="te-table">
         <thead>
             <th></th>
@@ -66,7 +76,6 @@
             <th>Touchdowns</th>
         </thead>
     </table>
-    <h1>Kickers</h1>
     <table id="k-table">
         <thead>
             <th></th>
