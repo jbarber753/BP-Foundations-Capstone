@@ -1,11 +1,14 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const {SERVER_PORT} = process.env;
 const { seed } = require('./seed.js');
 const { getPlayers, getTeams, getPositions, getQBStats, getRBStats, getWRStats, getTEStats, getKickerStats } = require(`./controller.js`)
 
 app.use(express.json());
+app.use(cors());
+app.use(express.static(`${__dirname}/public`))
 
 app.post(`/seed`, seed);
 app.get(`/players`, getPlayers);
