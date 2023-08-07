@@ -1,3 +1,12 @@
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48;
+  visibility: hidden;
+}
+
 body{
     margin: 0;
 }
@@ -28,10 +37,15 @@ a{
     margin: 10px 0 10px 10px;
 }
 
+#table-wrapper{
+    width: 100;
+    margin: auto;
+    overflow-x: scroll;
+}
+
 table{
-    margin-left: 10px;
+    width: 100%;
     border-collapse: collapse;
-    /* border-spacing: 20px; */
 }
   
 tr {
@@ -44,15 +58,38 @@ tr:nth-child(even){
 
 td{
     font-size: 18px;
-    margin-bottom: 10px;
+    padding: 10px 0;
 }
 
 th{
-    padding: 0 20px;
+    font-size: 24px;
+}
+
+.table-label{
+    display: flex;
+    margin: 0 20px;
+}
+
+.table-label span{
+    display: flex;
+    min-width: max-content;
 }
 
 td, th{
     text-align: center;
+}
+
+.inactive:hover{
+    cursor: pointer;
+    .material-symbols-outlined{visibility: visible;}
+}
+
+.active:hover{
+    cursor: pointer;
+}
+
+.active .material-symbols-outlined{
+    visibility: visible;
 }
 
 #rb-table, #wr-table, #te-table, #k-table{

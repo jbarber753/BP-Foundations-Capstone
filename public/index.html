@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <style>@import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap');</style>
-    <title>Judah's Fantasy Football Database</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Mock League Fantasy</title>
 </head>
 <body>
     <header>Mock League Fantasy Football
@@ -23,68 +24,280 @@
         <option value="te">Tight Ends</option>
         <option value="k">Kickers</option>
     </select>
-    <table id="qb-table">
-        <thead>
-            <th></th>
-            <th>Pass Attempts</th>
-            <th>Completions</th>
-            <th>Passing Yards</th>
-            <th>Passing Touchdowns</th>
-            <th>Interceptions</th>
-            <th>Rushing Attempts</th>
-            <th>Rushing Yards</th>
-            <th>Yards Per Carry</th>
-            <th>Rushing Touchdowns</th>
-        </thead>
-    </table>
-    <table id="rb-table">
-        <thead>
-            <th></th>
-            <th>Rushing Attempts</th>
-            <th>Rushing Yards</th>
-            <th>Yards Per Carry</th>
-            <th>Receiving Targets</th>
-            <th>Receptions</th>
-            <th>Receiving Yards</th>
-            <th>Yards Per Reception</th>
-            <th>Touchdowns</th>
-        </thead>
-    </table>
-    <table id="wr-table">
-        <thead>
-            <th></th>
-            <th>Receiving Targets</th>
-            <th>Receptions</th>
-            <th>Receiving Yards</th>
-            <th>Yards Per Reception</th>
-            <th>Rushing Attempts</th>
-            <th>Rushing Yards</th>
-            <th>Yards Per Carry</th>
-            <th>Touchdowns</th>
-        </thead>
-    </table>
-    <table id="te-table">
-        <thead>
-            <th></th>
-            <th>Receiving Targets</th>
-            <th>Receptions</th>
-            <th>Receiving Yards</th>
-            <th>Yards Per Reception</th>
-            <th>Rushing Attempts</th>
-            <th>Rushing Yards</th>
-            <th>Yards Per Carry</th>
-            <th>Touchdowns</th>
-        </thead>
-    </table>
-    <table id="k-table">
-        <thead>
-            <th></th>
-            <th>Extra Point Attempts</th>
-            <th>Extra Points Made</th>
-            <th>Field Goal Attempts</th>
-            <th>Field Goals Made</th>
-        </thead>
-    </table>
+    <div id="table-wrapper">
+        <table id="qb-table">
+            <thead>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Player</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Pass Attempts</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Completions</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Passing Yards</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Passing Touchdowns</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Interceptions</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Rushing Attempts</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Rushing Yards</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Yards Per Carry</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Rushing Touchdowns</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+            </thead>
+        </table>
+        <table id="rb-table">
+            <thead>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Player</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Rushing Attempts</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Rushing Yards</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Yards Per Carry</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Receiving Targets</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Receptions</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Receiving Yards</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Yards Per Reception</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Touchdowns</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+            </thead>
+        </table>
+        <table id="wr-table">
+            <thead>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Player</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Receiving Targets</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Receptions</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Receiving Yards</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Yards Per Reception</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Rushing Attempts</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Rushing Yards</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Yards Per Carry</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Touchdowns</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+            </thead>
+        </table>
+        <table id="te-table">
+            <thead>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Player</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Receiving Targets</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Receptions</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Receiving Yards</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Yards Per Reception</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Rushing Attempts</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Rushing Yards</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Yards Per Carry</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Touchdowns</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+            </thead>
+        </table>
+        <table id="k-table">
+            <thead>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Player</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Extra Point Attempts</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Extra Points Made</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Field Goal Attempts</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+                <th class="inactive">
+                    <div class="table-label">
+                        <span>Field Goals Made</span>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                </th>
+            </thead>
+        </table>
+    </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="main.js"></script>
 </body>

@@ -4,11 +4,11 @@ const wrTable = document.getElementById(`wr-table`);
 const teTable = document.getElementById(`te-table`);
 const kTable = document.getElementById(`k-table`);
 const dropDown = document.getElementById(`position-select`);
+const tableHeaders = document.getElementsByTagName(`th`);
 
 const baseURL = `http://localhost:4000`;
 
 const renderTable = () => {
-    console.log(dropDown.value)
     switch (dropDown.value){
         case `qb`:
             qbTable.style.display = `table`;
@@ -45,12 +45,6 @@ const renderTable = () => {
             teTable.style.display = `none`;
             kTable.style.display = `table`;
             break;
-    //     default:
-    //         qbTable.style.display = `table`;
-    //         rbTable.style.display = `none`;
-    //         wrTable.style.display = `none`;
-    //         teTable.style.display = `none`;
-    //         kTable.style.display = `none`;
     }
 }
 
@@ -225,11 +219,32 @@ const displayKs = () => {
     })
 }
 
+const handleSort = event => {
+    if (event.currentTarget.className === `active`){
+        if (event.currentTarget.children[0].children[1].textContent === `expand_more`){
+            event.currentTarget.children[0].children[1].textContent = `expand_less`;
+        }
+        else{
+            event.currentTarget.children[0].children[1].textContent = `expand_more`;
+        }
+    }
+    for (let i = 0; i < tableHeaders.length; i++){
+        tableHeaders[i].classList.replace(`active`, `inactive`);
+        if (tableHeaders[i] !== event.currentTarget){
+            tableHeaders[i].classList.replace(`active`, `inactive`);
+            tableHeaders[i].children[0].children[1].textContent = `expand_more`;
+        }
+    }
+    event.currentTarget.classList.replace(`inactive`, `active`);
+}
+
 displayQBs();
 displayRBs();
 displayWRs();
 displayTEs();
 displayKs();
 
-console.log(dropDown.value)
 dropDown.addEventListener(`change`, renderTable);
+for (let i = 0; i < tableHeaders.length; i ++){
+    tableHeaders[i].addEventListener(`click`, handleSort);
+}
