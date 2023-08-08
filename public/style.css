@@ -30,6 +30,13 @@ nav{
 
 a{
     margin-right: 30px;
+    text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 h1{
