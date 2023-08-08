@@ -55,7 +55,7 @@ const displayQBs = (stat, sort) => {
     if (!stat && !sort){
         axios.get(`${baseURL}/quarterbacks`)
         .then(res => {
-            for (let i = 0; i < res.data.length; i++){
+            for (let i = 1; i < res.data.length; i++){
                 let newRow = qbTable.insertRow();
                 let name = newRow.insertCell();
                 let passAttempts = newRow.insertCell();
@@ -93,7 +93,7 @@ const displayQBs = (stat, sort) => {
     else{
         axios.get(`${baseURL}/quarterbacks?stat=${stat}&sort=${sort}`)
         .then(res => {
-            for (let i = 0; i < res.data.length; i++){
+            for (let i = 1; i < res.data.length; i++){
                 let newRow = qbTable.insertRow();
                 let name = newRow.insertCell();
                 let passAttempts = newRow.insertCell();
@@ -137,7 +137,7 @@ const displayRBs = (stat, sort) => {
     if (!stat && !sort){
         axios.get(`${baseURL}/runningbacks`)
         .then(res => {
-            for (let i = 0; i < res.data.length; i++){
+            for (let i = 1; i < res.data.length; i++){
                 let newRow = rbTable.insertRow();
                 let name = newRow.insertCell();
                 let rushingAttempts = newRow.insertCell();
@@ -172,7 +172,7 @@ const displayRBs = (stat, sort) => {
     else{
         axios.get(`${baseURL}/runningbacks?stat=${stat}&sort=${sort}`)
         .then(res => {
-            for (let i = 0; i < res.data.length; i++){
+            for (let i = 1; i < res.data.length; i++){
                 let newRow = rbTable.insertRow();
                 let name = newRow.insertCell();
                 let rushingAttempts = newRow.insertCell();
@@ -213,7 +213,7 @@ const displayWRs = (stat, sort) => {
     if(!stat && !sort){
         axios.get(`${baseURL}/widereceivers`)
         .then(res => {
-            for (let i = 0; i < res.data.length; i++){
+            for (let i = 1; i < res.data.length; i++){
                 let newRow = wrTable.insertRow();
                 let name = newRow.insertCell();
                 let receivingTargets = newRow.insertCell();
@@ -248,7 +248,7 @@ const displayWRs = (stat, sort) => {
     else{
         axios.get(`${baseURL}/widereceivers?stat=${stat}&sort=${sort}`)
         .then(res => {
-            for (let i = 0; i < res.data.length; i++){
+            for (let i = 1; i < res.data.length; i++){
                 let newRow = wrTable.insertRow();
                 let name = newRow.insertCell();
                 let receivingTargets = newRow.insertCell();
@@ -289,7 +289,7 @@ const displayTEs = (stat, sort) => {
     if (!stat && !sort){
         axios.get(`${baseURL}/tightends`)
         .then(res => {
-            for (let i = 0; i < res.data.length; i++){
+            for (let i = 1; i < res.data.length; i++){
                 let newRow = teTable.insertRow();
                 let name = newRow.insertCell();
                 let receivingTargets = newRow.insertCell();
@@ -324,7 +324,7 @@ const displayTEs = (stat, sort) => {
     else{
         axios.get(`${baseURL}/tightends?stat=${stat}&sort=${sort}`)
         .then(res => {
-            for (let i = 0; i < res.data.length; i++){
+            for (let i = 1; i < res.data.length; i++){
                 let newRow = teTable.insertRow();
                 let name = newRow.insertCell();
                 let receivingTargets = newRow.insertCell();
@@ -365,7 +365,7 @@ const displayKs = (stat, sort) => {
     if (!stat && !sort){
         axios.get(`${baseURL}/kickers`)
         .then(res => {
-            for (let i = 0; i < res.data.length; i++){
+            for (let i = 1; i < res.data.length; i++){
                 let newRow = kTable.insertRow();
                 let name = newRow.insertCell();
                 let xpAttempts = newRow.insertCell();
@@ -388,7 +388,7 @@ const displayKs = (stat, sort) => {
     else{
         axios.get(`${baseURL}/kickers?stat=${stat}&sort=${sort}`)
         .then(res => {
-            for (let i = 0; i < res.data.length; i++){
+            for (let i = 1; i < res.data.length; i++){
                 let newRow = kTable.insertRow();
                 let name = newRow.insertCell();
                 let xpAttempts = newRow.insertCell();
@@ -422,7 +422,7 @@ const handleSort = event => {
     }
     for (let i = 0; i < tableHeaders.length; i++){
         tableHeaders[i].classList.replace(`active`, `inactive`);
-        if (tableHeaders[i] !== event.currentTarget){
+        if (tableHeaders[i] !== event.currentTarget && tableHeaders[i].children[0] !== undefined){
             tableHeaders[i].classList.replace(`active`, `inactive`);
             tableHeaders[i].children[0].children[1].textContent = `expand_more`;
         }

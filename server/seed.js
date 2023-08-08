@@ -117,8 +117,11 @@ module.exports = {
                         )
                     }
                     sequelize.query(`
+                      SELECT SETSEED(0.753);
                       INSERT INTO quarterbacks SELECT player_id, FLOOR(RANDOM() * (850 - 170) + 170), FLOOR(RANDOM() * (5500 - 1000) + 1000), FLOOR(RANDOM() * (60 - 20) + 20), FLOOR(RANDOM() * 30), FLOOR(RANDOM() * (160 - 10) + 10), FLOOR(RANDOM() * (1000 - 20) + 20), FLOOR(RANDOM() * 15) FROM players WHERE position = 1;
+                      SELECT SETSEED(0.476);
                       INSERT INTO skill_positions SELECT player_id, FLOOR(RANDOM() * (380 - 1) + 2), FLOOR(RANDOM() * 2100), FLOOR(RANDOM() * (210 - 1) + 2), FLOOR(RANDOM() * 2000), FLOOR(RANDOM() * 30) FROM players WHERE position IN (2, 3, 4);
+                      SELECT SETSEED(0.1453);
                       INSERT INTO kickers SELECT player_id, FLOOR(RANDOM() * (85-10) + 10), FLOOR(RANDOM() * (50-15) +15) FROM players WHERE position = 5;
                     `)
                     console.log(`Players seeded!`)
