@@ -18,12 +18,20 @@ module.exports = {
       sequelize
         .query(
             `
+            DROP TABLE IF EXISTS users;
             DROP TABLE IF EXISTS quarterbacks;
             DROP TABLE IF EXISTS skill_positions;
             DROP TABLE IF EXISTS kickers;
             DROP TABLE IF EXISTS players;
             DROP TABLE IF EXISTS teams;
             DROP TABLE IF EXISTS positions;
+
+            CREATE TABLE users (
+              id SERIAL PRIMARY KEY,
+              email VARCHAR,
+              username VARCHAR,
+              password VARCHAR
+            );
 
             CREATE TABLE teams (
               team_id SERIAL PRIMARY KEY,

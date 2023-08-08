@@ -1,5 +1,6 @@
 require('dotenv').config();
 const { CONNECTION_STRING } = process.env;
+const { default: axios } = require('axios');
 const Sequelize = require(`sequelize`);
 
 const sequelize = new Sequelize(CONNECTION_STRING, 
@@ -14,6 +15,31 @@ const sequelize = new Sequelize(CONNECTION_STRING,
 )
 
 module.exports = {
+    createUser: (req, res) => {
+        const { email, username, password } = req.body;
+        console.log(username)
+        sequelize.query(`SELECT * FROM users WHERE username = '${username}'`)
+        .then(dbres => {
+            console.log(dbres[0])
+            if (dbres[0].length){
+                res.status(409).send(`This username is unavailable`)
+            }
+            else{
+                sequelize.query(`INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}')`)
+                .then(() => {
+                    res.status(200).send(`Account created!`)
+                })
+            }
+        })
+    },
+
+    getUsers: (req, res) => {
+        sequelize.query(`SELECT * FROM users`)
+        .then(dbres => {
+            res.status(200).send(dbres[0])})
+        .catch(error => console.log(error))
+    },
+
     getPlayers: (req, res) => {
         const { team, position } = req.query;
         if (!team && !position){
