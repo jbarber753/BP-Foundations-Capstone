@@ -97,12 +97,32 @@ td, th{
 }
 
 .filler{
-    width: 50px;
+    width: 40px;
     display: block;
 }
 
-.name-cell{
+.button-cell{
     padding-left: 20px;
+}
+
+.add-button{
+    background-color: red;
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: maroon;
+    border-image: initial;
+}
+
+.add-button:hover{
+    cursor: pointer;
+    background-color: rgb(211, 0, 0);
+}
+
+.name-cell{
+    padding-left: 50px;
 }
 
 .inactive:hover{

@@ -8,8 +8,15 @@ const tableHeaders = document.getElementsByTagName(`th`);
 const loginButton = document.getElementById(`login-nav`);
 const logoutButton = document.getElementById(`logout-nav`);
 const teamButton = document.getElementById(`team-nav`);
+const qbHeaders = document.getElementById(`qb-headers`);
+const rbHeaders = document.getElementById(`rb-headers`);
+const wrHeaders = document.getElementById(`wr-headers`);
+const teHeaders = document.getElementById(`te-headers`);
+const kHeaders = document.getElementById(`k-headers`);
 
 const baseURL = `http://localhost:4000`;
+
+let renderAddButtons = false;
 
 const checkAuth = () => {
     axios.get(`${baseURL}/auth`)
@@ -23,7 +30,8 @@ const checkAuth = () => {
             loginButton.style.display = `none`;
             logoutButton.style.display = `inline`;
             teamButton.style.display = `inline`;
-            teamButton.textContent = `${res.data}'s Team`
+            teamButton.textContent = `${res.data}'s Team`;
+            renderAddButtons = true;
         }
     })
 }
@@ -82,8 +90,23 @@ const displayQBs = (stat, sort) => {
     if (!stat && !sort){
         axios.get(`${baseURL}/quarterbacks`)
         .then(res => {
+            if (renderAddButtons){
+                if (qbHeaders.children[0].id !== `qb-button-column`){
+                    let buttonColumn = document.createElement(`th`);
+                    buttonColumn.id = `qb-button-column`;
+                    qbHeaders.insertBefore(buttonColumn, qbHeaders.children[0])
+                }
+            }
             for (let i = 1; i < res.data.length; i++){
                 let newRow = qbTable.insertRow();
+                if (renderAddButtons){
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Add Player`;
+                    buttonCellContent.classList.add(`add-button`);
+                    buttonCell.appendChild(buttonCellContent);
+                }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
                 let filler = newRow.insertCell();
@@ -125,8 +148,23 @@ const displayQBs = (stat, sort) => {
     else{
         axios.get(`${baseURL}/quarterbacks?stat=${stat}&sort=${sort}`)
         .then(res => {
+            if (renderAddButtons){
+                if (qbHeaders.children[0].id !== `qb-button-column`){
+                    let buttonColumn = document.createElement(`th`);
+                    buttonColumn.id = `qb-button-column`;
+                    qbHeaders.insertBefore(buttonColumn, qbHeaders.children[0])
+                }
+            }
             for (let i = 1; i < res.data.length; i++){
                 let newRow = qbTable.insertRow();
+                if (renderAddButtons){
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Add Player`;
+                    buttonCellContent.classList.add(`add-button`);
+                    buttonCell.appendChild(buttonCellContent);
+                }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
                 let filler = newRow.insertCell();
@@ -174,8 +212,23 @@ const displayRBs = (stat, sort) => {
     if (!stat && !sort){
         axios.get(`${baseURL}/runningbacks`)
         .then(res => {
+            if (renderAddButtons){
+                if (rbHeaders.children[0].id !== `rb-button-column`){
+                    let buttonColumn = document.createElement(`th`);
+                    buttonColumn.id = `rb-button-column`;
+                    rbHeaders.insertBefore(buttonColumn, rbHeaders.children[0])
+                }
+            }
             for (let i = 1; i < res.data.length; i++){
                 let newRow = rbTable.insertRow();
+                if (renderAddButtons){
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Add Player`;
+                    buttonCellContent.classList.add(`add-button`);
+                    buttonCell.appendChild(buttonCellContent);
+                }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
                 let filler = newRow.insertCell();
@@ -214,8 +267,23 @@ const displayRBs = (stat, sort) => {
     else{
         axios.get(`${baseURL}/runningbacks?stat=${stat}&sort=${sort}`)
         .then(res => {
+            if (renderAddButtons){
+                if (rbHeaders.children[0].id !== `rb-button-column`){
+                    let buttonColumn = document.createElement(`th`);
+                    buttonColumn.id = `rb-button-column`;
+                    rbHeaders.insertBefore(buttonColumn, rbHeaders.children[0])
+                }
+            }
             for (let i = 1; i < res.data.length; i++){
                 let newRow = rbTable.insertRow();
+                if (renderAddButtons){
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Add Player`;
+                    buttonCellContent.classList.add(`add-button`);
+                    buttonCell.appendChild(buttonCellContent);
+                }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
                 let filler = newRow.insertCell();
@@ -260,8 +328,23 @@ const displayWRs = (stat, sort) => {
     if(!stat && !sort){
         axios.get(`${baseURL}/widereceivers`)
         .then(res => {
+            if (renderAddButtons){
+                if (wrHeaders.children[0].id !== `wr-button-column`){
+                    let buttonColumn = document.createElement(`th`);
+                    buttonColumn.id = `wr-button-column`;
+                    wrHeaders.insertBefore(buttonColumn, wrHeaders.children[0])
+                }
+            }
             for (let i = 1; i < res.data.length; i++){
                 let newRow = wrTable.insertRow();
+                if (renderAddButtons){
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Add Player`;
+                    buttonCellContent.classList.add(`add-button`);
+                    buttonCell.appendChild(buttonCellContent);
+                }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
                 let filler = newRow.insertCell();
@@ -300,8 +383,23 @@ const displayWRs = (stat, sort) => {
     else{
         axios.get(`${baseURL}/widereceivers?stat=${stat}&sort=${sort}`)
         .then(res => {
+            if (renderAddButtons){
+                if (wrHeaders.children[0].id !== `wr-button-column`){
+                    let buttonColumn = document.createElement(`th`);
+                    buttonColumn.id = `wr-button-column`;
+                    rbHeaders.insertBefore(buttonColumn, wrHeaders.children[0])
+                }
+            }
             for (let i = 1; i < res.data.length; i++){
                 let newRow = wrTable.insertRow();
+                if (renderAddButtons){
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Add Player`;
+                    buttonCellContent.classList.add(`add-button`);
+                    buttonCell.appendChild(buttonCellContent);
+                }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
                 let filler = newRow.insertCell();
@@ -346,8 +444,23 @@ const displayTEs = (stat, sort) => {
     if (!stat && !sort){
         axios.get(`${baseURL}/tightends`)
         .then(res => {
+            if (renderAddButtons){
+                if (teHeaders.children[0].id !== `te-button-column`){
+                    let buttonColumn = document.createElement(`th`);
+                    buttonColumn.id = `te-button-column`;
+                    teHeaders.insertBefore(buttonColumn, teHeaders.children[0])
+                }
+            }
             for (let i = 1; i < res.data.length; i++){
                 let newRow = teTable.insertRow();
+                if (renderAddButtons){
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Add Player`;
+                    buttonCellContent.classList.add(`add-button`);
+                    buttonCell.appendChild(buttonCellContent);
+                }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
                 let filler = newRow.insertCell();
@@ -386,8 +499,23 @@ const displayTEs = (stat, sort) => {
     else{
         axios.get(`${baseURL}/tightends?stat=${stat}&sort=${sort}`)
         .then(res => {
+            if (renderAddButtons){
+                if (teHeaders.children[0].id !== `te-button-column`){
+                    let buttonColumn = document.createElement(`th`);
+                    buttonColumn.id = `te-button-column`;
+                    teHeaders.insertBefore(buttonColumn, teHeaders.children[0])
+                }
+            }
             for (let i = 1; i < res.data.length; i++){
                 let newRow = teTable.insertRow();
+                if (renderAddButtons){
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Add Player`;
+                    buttonCellContent.classList.add(`add-button`);
+                    buttonCell.appendChild(buttonCellContent);
+                }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
                 let filler = newRow.insertCell();
@@ -432,8 +560,23 @@ const displayKs = (stat, sort) => {
     if (!stat && !sort){
         axios.get(`${baseURL}/kickers`)
         .then(res => {
+            if (renderAddButtons){
+                if (kHeaders.children[0].id !== `k-button-column`){
+                    let buttonColumn = document.createElement(`th`);
+                    buttonColumn.id = `k-button-column`;
+                    kHeaders.insertBefore(buttonColumn, kHeaders.children[0])
+                }
+            }
             for (let i = 1; i < res.data.length; i++){
                 let newRow = kTable.insertRow();
+                if (renderAddButtons){
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Add Player`;
+                    buttonCellContent.classList.add(`add-button`);
+                    buttonCell.appendChild(buttonCellContent);
+                }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
                 let filler = newRow.insertCell();
@@ -460,8 +603,23 @@ const displayKs = (stat, sort) => {
     else{
         axios.get(`${baseURL}/kickers?stat=${stat}&sort=${sort}`)
         .then(res => {
+            if (renderAddButtons){
+                if (kHeaders.children[0].id !== `k-button-column`){
+                    let buttonColumn = document.createElement(`th`);
+                    buttonColumn.id = `k-button-column`;
+                    kHeaders.insertBefore(buttonColumn, kHeaders.children[0])
+                }
+            }
             for (let i = 1; i < res.data.length; i++){
                 let newRow = kTable.insertRow();
+                if (renderAddButtons){
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Add Player`;
+                    buttonCellContent.classList.add(`add-button`);
+                    buttonCell.appendChild(buttonCellContent);
+                }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
                 let filler = newRow.insertCell();
