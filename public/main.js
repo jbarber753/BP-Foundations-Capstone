@@ -89,122 +89,152 @@ const displayQBs = (stat, sort) => {
     }
     if (!stat && !sort){
         axios.get(`${baseURL}/quarterbacks`)
-        .then(res => {
-            if (renderAddButtons){
-                if (qbHeaders.children[0].id !== `qb-button-column`){
-                    let buttonColumn = document.createElement(`th`);
-                    buttonColumn.id = `qb-button-column`;
-                    qbHeaders.insertBefore(buttonColumn, qbHeaders.children[0])
+        .then(res1 => {
+            axios.get(`${baseURL}/claimedqbs`)
+            .then(res2 => {
+                let claimedQBs = [];
+                for (let i = 0; i < res2.data.length; i++){
+                    claimedQBs.push(res2.data[i].id)
                 }
-            }
-            for (let i = 1; i < res.data.length; i++){
-                let newRow = qbTable.insertRow();
                 if (renderAddButtons){
-                    let buttonCell = newRow.insertCell();
-                    buttonCell.classList.add(`button-cell`);
-                    let buttonCellContent = document.createElement(`button`);
-                    buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`qb-add-button`);
-                    buttonCellContent.id = res.data[i].id;
-                    buttonCell.appendChild(buttonCellContent);
-                    buttonCellContent.addEventListener(`click`, addPlayer);
+                    if (qbHeaders.children[0].id !== `qb-button-column`){
+                        let buttonColumn = document.createElement(`th`);
+                        buttonColumn.id = `qb-button-column`;
+                        qbHeaders.insertBefore(buttonColumn, qbHeaders.children[0])
+                    }
                 }
-                let name = newRow.insertCell();
-                name.classList.add(`name-cell`);
-                let filler = newRow.insertCell();
-                let team = newRow.insertCell();
-                let passAttempts = newRow.insertCell();
-                let completions = newRow.insertCell();
-                let passingYards = newRow.insertCell();
-                let passingTDs = newRow.insertCell();
-                let interceptions = newRow.insertCell();
-                let rushingAttempts = newRow.insertCell();
-                let rushingYards = newRow.insertCell();
-                let yardsPerCarry = newRow.insertCell();
-                let rushingTDs = newRow.insertCell();
-                let nameText = document.createTextNode(`${res.data[i].name}`);
-                let teamText = document.createTextNode(`${res.data[i].team}`);
-                let passAttemptsText = document.createTextNode(`${res.data[i].pass_attempts}`);
-                let completionsText = document.createTextNode(`${res.data[i].completions}`);
-                let passingYardsText = document.createTextNode(`${res.data[i].passing_yards}`);
-                let passingTDsText = document.createTextNode(`${res.data[i].passing_tds}`);
-                let interceptionsText = document.createTextNode(`${res.data[i].interceptions}`);
-                let rushingAttemptsText = document.createTextNode(`${res.data[i].rushing_attempts}`);
-                let rushingYardsText = document.createTextNode(`${res.data[i].rushing_yards}`);
-                let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
-                let rushingTDsText = document.createTextNode(`${res.data[i].rushing_tds}`);
-                name.appendChild(nameText);
-                team.appendChild(teamText);
-                passAttempts.appendChild(passAttemptsText);
-                completions.appendChild(completionsText);
-                passingYards.appendChild(passingYardsText);
-                passingTDs.appendChild(passingTDsText);
-                interceptions.appendChild(interceptionsText);
-                rushingAttempts.appendChild(rushingAttemptsText);
-                rushingYards.appendChild(rushingYardsText);
-                yardsPerCarry.appendChild(yardsPerCarryText);
-                rushingTDs.appendChild(rushingTDsText);
-            }
+                for (let i = 1; i < res1.data.length; i++){
+                    let newRow = qbTable.insertRow();
+                    if (renderAddButtons){
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        if (claimedQBs.includes(res1.data[i].id)){
+                            buttonCellContent.textContent = `Player Unavailable`;
+                            buttonCellContent.classList.add(`already-added`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                        }
+                        else{
+                            buttonCellContent.textContent = `Add Player`;
+                            buttonCellContent.classList.add(`qb-add-button`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                            buttonCellContent.addEventListener(`click`, addPlayer);
+                        }
+                    }
+                    let name = newRow.insertCell();
+                    name.classList.add(`name-cell`);
+                    let filler = newRow.insertCell();
+                    let team = newRow.insertCell();
+                    let passAttempts = newRow.insertCell();
+                    let completions = newRow.insertCell();
+                    let passingYards = newRow.insertCell();
+                    let passingTDs = newRow.insertCell();
+                    let interceptions = newRow.insertCell();
+                    let rushingAttempts = newRow.insertCell();
+                    let rushingYards = newRow.insertCell();
+                    let yardsPerCarry = newRow.insertCell();
+                    let rushingTDs = newRow.insertCell();
+                    let nameText = document.createTextNode(`${res1.data[i].name}`);
+                    let teamText = document.createTextNode(`${res1.data[i].team}`);
+                    let passAttemptsText = document.createTextNode(`${res1.data[i].pass_attempts}`);
+                    let completionsText = document.createTextNode(`${res1.data[i].completions}`);
+                    let passingYardsText = document.createTextNode(`${res1.data[i].passing_yards}`);
+                    let passingTDsText = document.createTextNode(`${res1.data[i].passing_tds}`);
+                    let interceptionsText = document.createTextNode(`${res1.data[i].interceptions}`);
+                    let rushingAttemptsText = document.createTextNode(`${res1.data[i].rushing_attempts}`);
+                    let rushingYardsText = document.createTextNode(`${res1.data[i].rushing_yards}`);
+                    let yardsPerCarryText = document.createTextNode(`${res1.data[i].yards_per_carry}`);
+                    let rushingTDsText = document.createTextNode(`${res1.data[i].rushing_tds}`);
+                    name.appendChild(nameText);
+                    team.appendChild(teamText);
+                    passAttempts.appendChild(passAttemptsText);
+                    completions.appendChild(completionsText);
+                    passingYards.appendChild(passingYardsText);
+                    passingTDs.appendChild(passingTDsText);
+                    interceptions.appendChild(interceptionsText);
+                    rushingAttempts.appendChild(rushingAttemptsText);
+                    rushingYards.appendChild(rushingYardsText);
+                    yardsPerCarry.appendChild(yardsPerCarryText);
+                    rushingTDs.appendChild(rushingTDsText);
+                }
+            })
         })
     }
     else{
         axios.get(`${baseURL}/quarterbacks?stat=${stat}&sort=${sort}`)
-        .then(res => {
-            if (renderAddButtons){
-                if (qbHeaders.children[0].id !== `qb-button-column`){
-                    let buttonColumn = document.createElement(`th`);
-                    buttonColumn.id = `qb-button-column`;
-                    qbHeaders.insertBefore(buttonColumn, qbHeaders.children[0])
+        .then(res1 => {
+            axios.get(`${baseURL}/claimedqbs`)
+            .then(res2 => {
+                let claimedQBs = [];
+                for (let i = 0; i < res2.data.length; i++){
+                    claimedQBs.push(res2.data[i].id)
                 }
-            }
-            for (let i = 1; i < res.data.length; i++){
-                let newRow = qbTable.insertRow();
                 if (renderAddButtons){
-                    let buttonCell = newRow.insertCell();
-                    buttonCell.classList.add(`button-cell`);
-                    let buttonCellContent = document.createElement(`button`);
-                    buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`qb-add-button`);
-                    buttonCellContent.id = res.data[i].id;
-                    buttonCell.appendChild(buttonCellContent);
-                    buttonCellContent.addEventListener(`click`, addPlayer);
+                    if (qbHeaders.children[0].id !== `qb-button-column`){
+                        let buttonColumn = document.createElement(`th`);
+                        buttonColumn.id = `qb-button-column`;
+                        qbHeaders.insertBefore(buttonColumn, qbHeaders.children[0])
+                    }
                 }
-                let name = newRow.insertCell();
-                name.classList.add(`name-cell`);
-                let filler = newRow.insertCell();
-                let team = newRow.insertCell();
-                let passAttempts = newRow.insertCell();
-                let completions = newRow.insertCell();
-                let passingYards = newRow.insertCell();
-                let passingTDs = newRow.insertCell();
-                let interceptions = newRow.insertCell();
-                let rushingAttempts = newRow.insertCell();
-                let rushingYards = newRow.insertCell();
-                let yardsPerCarry = newRow.insertCell();
-                let rushingTDs = newRow.insertCell();
-                let nameText = document.createTextNode(`${res.data[i].name}`);
-                let teamText = document.createTextNode(`${res.data[i].team}`);
-                let passAttemptsText = document.createTextNode(`${res.data[i].pass_attempts}`);
-                let completionsText = document.createTextNode(`${res.data[i].completions}`);
-                let passingYardsText = document.createTextNode(`${res.data[i].passing_yards}`);
-                let passingTDsText = document.createTextNode(`${res.data[i].passing_tds}`);
-                let interceptionsText = document.createTextNode(`${res.data[i].interceptions}`);
-                let rushingAttemptsText = document.createTextNode(`${res.data[i].rushing_attempts}`);
-                let rushingYardsText = document.createTextNode(`${res.data[i].rushing_yards}`);
-                let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
-                let rushingTDsText = document.createTextNode(`${res.data[i].rushing_tds}`);
-                name.appendChild(nameText);
-                team.appendChild(teamText);
-                passAttempts.appendChild(passAttemptsText);
-                completions.appendChild(completionsText);
-                passingYards.appendChild(passingYardsText);
-                passingTDs.appendChild(passingTDsText);
-                interceptions.appendChild(interceptionsText);
-                rushingAttempts.appendChild(rushingAttemptsText);
-                rushingYards.appendChild(rushingYardsText);
-                yardsPerCarry.appendChild(yardsPerCarryText);
-                rushingTDs.appendChild(rushingTDsText);
-            }
+                for (let i = 1; i < res1.data.length; i++){
+                    let newRow = qbTable.insertRow();
+                    if (renderAddButtons){
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        if (claimedQBs.includes(res1.data[i].id)){
+                            buttonCellContent.textContent = `Player Unavailable`;
+                            buttonCellContent.classList.add(`already-added`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                        }
+                        else{
+                            buttonCellContent.textContent = `Add Player`;
+                            buttonCellContent.classList.add(`qb-add-button`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                            buttonCellContent.addEventListener(`click`, addPlayer);
+                        }
+                    }
+                    let name = newRow.insertCell();
+                    name.classList.add(`name-cell`);
+                    let filler = newRow.insertCell();
+                    let team = newRow.insertCell();
+                    let passAttempts = newRow.insertCell();
+                    let completions = newRow.insertCell();
+                    let passingYards = newRow.insertCell();
+                    let passingTDs = newRow.insertCell();
+                    let interceptions = newRow.insertCell();
+                    let rushingAttempts = newRow.insertCell();
+                    let rushingYards = newRow.insertCell();
+                    let yardsPerCarry = newRow.insertCell();
+                    let rushingTDs = newRow.insertCell();
+                    let nameText = document.createTextNode(`${res1.data[i].name}`);
+                    let teamText = document.createTextNode(`${res1.data[i].team}`);
+                    let passAttemptsText = document.createTextNode(`${res1.data[i].pass_attempts}`);
+                    let completionsText = document.createTextNode(`${res1.data[i].completions}`);
+                    let passingYardsText = document.createTextNode(`${res1.data[i].passing_yards}`);
+                    let passingTDsText = document.createTextNode(`${res1.data[i].passing_tds}`);
+                    let interceptionsText = document.createTextNode(`${res1.data[i].interceptions}`);
+                    let rushingAttemptsText = document.createTextNode(`${res1.data[i].rushing_attempts}`);
+                    let rushingYardsText = document.createTextNode(`${res1.data[i].rushing_yards}`);
+                    let yardsPerCarryText = document.createTextNode(`${res1.data[i].yards_per_carry}`);
+                    let rushingTDsText = document.createTextNode(`${res1.data[i].rushing_tds}`);
+                    name.appendChild(nameText);
+                    team.appendChild(teamText);
+                    passAttempts.appendChild(passAttemptsText);
+                    completions.appendChild(completionsText);
+                    passingYards.appendChild(passingYardsText);
+                    passingTDs.appendChild(passingTDsText);
+                    interceptions.appendChild(interceptionsText);
+                    rushingAttempts.appendChild(rushingAttemptsText);
+                    rushingYards.appendChild(rushingYardsText);
+                    yardsPerCarry.appendChild(yardsPerCarryText);
+                    rushingTDs.appendChild(rushingTDsText);
+                }
+            })
         })
     }
 }
@@ -215,116 +245,146 @@ const displayRBs = (stat, sort) => {
     }
     if (!stat && !sort){
         axios.get(`${baseURL}/runningbacks`)
-        .then(res => {
-            if (renderAddButtons){
-                if (rbHeaders.children[0].id !== `rb-button-column`){
-                    let buttonColumn = document.createElement(`th`);
-                    buttonColumn.id = `rb-button-column`;
-                    rbHeaders.insertBefore(buttonColumn, rbHeaders.children[0])
+        .then(res1 => {
+            axios.get(`${baseURL}/claimedrbs`)
+            .then(res2 => {
+                let claimedRBs = [];
+                for (let i = 0; i < res2.data.length; i++){
+                    claimedRBs.push(res2.data[i].id)
                 }
-            }
-            for (let i = 1; i < res.data.length; i++){
-                let newRow = rbTable.insertRow();
                 if (renderAddButtons){
-                    let buttonCell = newRow.insertCell();
-                    buttonCell.classList.add(`button-cell`);
-                    let buttonCellContent = document.createElement(`button`);
-                    buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`rb-add-button`);
-                    buttonCellContent.id = res.data[i].id;
-                    buttonCell.appendChild(buttonCellContent);
-                    buttonCellContent.addEventListener(`click`, addPlayer);
+                    if (rbHeaders.children[0].id !== `rb-button-column`){
+                        let buttonColumn = document.createElement(`th`);
+                        buttonColumn.id = `rb-button-column`;
+                        rbHeaders.insertBefore(buttonColumn, rbHeaders.children[0])
+                    }
                 }
-                let name = newRow.insertCell();
-                name.classList.add(`name-cell`);
-                let filler = newRow.insertCell();
-                let team = newRow.insertCell();
-                let rushingAttempts = newRow.insertCell();
-                let rushingYards = newRow.insertCell();
-                let yardsPerCarry = newRow.insertCell();
-                let receivingTargets = newRow.insertCell();
-                let receptions = newRow.insertCell();
-                let receivingYards = newRow.insertCell();
-                let yardsPerReception = newRow.insertCell();
-                let touchdowns = newRow.insertCell();
-                let nameText = document.createTextNode(`${res.data[i].name}`);
-                let teamText = document.createTextNode(`${res.data[i].team}`);
-                let rushingAttemptsText = document.createTextNode(`${res.data[i].rushing_attempts}`);
-                let rushingYardsText = document.createTextNode(`${res.data[i].rushing_yards}`);
-                let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
-                let receivingTargetsText = document.createTextNode(`${res.data[i].receiving_targets}`);
-                let receptionsText = document.createTextNode(`${res.data[i].receptions}`);
-                let receivingYardsText = document.createTextNode(`${res.data[i].receiving_yards}`);
-                let yardsPerReceptionText = document.createTextNode(`${res.data[i].yards_per_reception}`);
-                let touchdownsText = document.createTextNode(`${res.data[i].touchdowns}`);
-                name.appendChild(nameText);
-                team.appendChild(teamText);
-                rushingAttempts.appendChild(rushingAttemptsText);
-                rushingYards.appendChild(rushingYardsText);
-                yardsPerCarry.appendChild(yardsPerCarryText);
-                receivingTargets.appendChild(receivingTargetsText);
-                receptions.appendChild(receptionsText);
-                receivingYards.appendChild(receivingYardsText);
-                yardsPerReception.appendChild(yardsPerReceptionText);
-                touchdowns.appendChild(touchdownsText);
-            }
+                for (let i = 1; i < res1.data.length; i++){
+                    let newRow = rbTable.insertRow();
+                    if (renderAddButtons){
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        if(claimedRBs.includes(res1.data[i].id)){
+                            buttonCellContent.textContent = `Player Unavailable`;
+                            buttonCellContent.classList.add(`already-added`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                        }
+                        else{
+                            buttonCellContent.textContent = `Add Player`;
+                            buttonCellContent.classList.add(`rb-add-button`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                            buttonCellContent.addEventListener(`click`, addPlayer);
+                        }
+                    }
+                    let name = newRow.insertCell();
+                    name.classList.add(`name-cell`);
+                    let filler = newRow.insertCell();
+                    let team = newRow.insertCell();
+                    let rushingAttempts = newRow.insertCell();
+                    let rushingYards = newRow.insertCell();
+                    let yardsPerCarry = newRow.insertCell();
+                    let receivingTargets = newRow.insertCell();
+                    let receptions = newRow.insertCell();
+                    let receivingYards = newRow.insertCell();
+                    let yardsPerReception = newRow.insertCell();
+                    let touchdowns = newRow.insertCell();
+                    let nameText = document.createTextNode(`${res1.data[i].name}`);
+                    let teamText = document.createTextNode(`${res1.data[i].team}`);
+                    let rushingAttemptsText = document.createTextNode(`${res1.data[i].rushing_attempts}`);
+                    let rushingYardsText = document.createTextNode(`${res1.data[i].rushing_yards}`);
+                    let yardsPerCarryText = document.createTextNode(`${res1.data[i].yards_per_carry}`);
+                    let receivingTargetsText = document.createTextNode(`${res1.data[i].receiving_targets}`);
+                    let receptionsText = document.createTextNode(`${res1.data[i].receptions}`);
+                    let receivingYardsText = document.createTextNode(`${res1.data[i].receiving_yards}`);
+                    let yardsPerReceptionText = document.createTextNode(`${res1.data[i].yards_per_reception}`);
+                    let touchdownsText = document.createTextNode(`${res1.data[i].touchdowns}`);
+                    name.appendChild(nameText);
+                    team.appendChild(teamText);
+                    rushingAttempts.appendChild(rushingAttemptsText);
+                    rushingYards.appendChild(rushingYardsText);
+                    yardsPerCarry.appendChild(yardsPerCarryText);
+                    receivingTargets.appendChild(receivingTargetsText);
+                    receptions.appendChild(receptionsText);
+                    receivingYards.appendChild(receivingYardsText);
+                    yardsPerReception.appendChild(yardsPerReceptionText);
+                    touchdowns.appendChild(touchdownsText);
+                }
+            })
         })
     }
     else{
         axios.get(`${baseURL}/runningbacks?stat=${stat}&sort=${sort}`)
-        .then(res => {
-            if (renderAddButtons){
-                if (rbHeaders.children[0].id !== `rb-button-column`){
-                    let buttonColumn = document.createElement(`th`);
-                    buttonColumn.id = `rb-button-column`;
-                    rbHeaders.insertBefore(buttonColumn, rbHeaders.children[0])
+        .then(res1 => {
+            axios.get(`${baseURL}/claimedrbs`)
+            .then(res2 => {
+                let claimedRBs = [];
+                for (let i = 0; i < res2.data.length; i++){
+                    claimedRBs.push(res2.data[i].id)
                 }
-            }
-            for (let i = 1; i < res.data.length; i++){
-                let newRow = rbTable.insertRow();
                 if (renderAddButtons){
-                    let buttonCell = newRow.insertCell();
-                    buttonCell.classList.add(`button-cell`);
-                    let buttonCellContent = document.createElement(`button`);
-                    buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`rb-add-button`);
-                    buttonCellContent.id = res.data[i].id;
-                    buttonCell.appendChild(buttonCellContent);
-                    buttonCellContent.addEventListener(`click`, addPlayer);
+                    if (rbHeaders.children[0].id !== `rb-button-column`){
+                        let buttonColumn = document.createElement(`th`);
+                        buttonColumn.id = `rb-button-column`;
+                        rbHeaders.insertBefore(buttonColumn, rbHeaders.children[0])
+                    }
                 }
-                let name = newRow.insertCell();
-                name.classList.add(`name-cell`);
-                let filler = newRow.insertCell();
-                let team = newRow.insertCell();
-                let rushingAttempts = newRow.insertCell();
-                let rushingYards = newRow.insertCell();
-                let yardsPerCarry = newRow.insertCell();
-                let receivingTargets = newRow.insertCell();
-                let receptions = newRow.insertCell();
-                let receivingYards = newRow.insertCell();
-                let yardsPerReception = newRow.insertCell();
-                let touchdowns = newRow.insertCell();
-                let nameText = document.createTextNode(`${res.data[i].name}`);
-                let teamText = document.createTextNode(`${res.data[i].team}`);
-                let rushingAttemptsText = document.createTextNode(`${res.data[i].rushing_attempts}`);
-                let rushingYardsText = document.createTextNode(`${res.data[i].rushing_yards}`);
-                let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
-                let receivingTargetsText = document.createTextNode(`${res.data[i].receiving_targets}`);
-                let receptionsText = document.createTextNode(`${res.data[i].receptions}`);
-                let receivingYardsText = document.createTextNode(`${res.data[i].receiving_yards}`);
-                let yardsPerReceptionText = document.createTextNode(`${res.data[i].yards_per_reception}`);
-                let touchdownsText = document.createTextNode(`${res.data[i].touchdowns}`);
-                name.appendChild(nameText);
-                team.appendChild(teamText);
-                rushingAttempts.appendChild(rushingAttemptsText);
-                rushingYards.appendChild(rushingYardsText);
-                yardsPerCarry.appendChild(yardsPerCarryText);
-                receivingTargets.appendChild(receivingTargetsText);
-                receptions.appendChild(receptionsText);
-                receivingYards.appendChild(receivingYardsText);
-                yardsPerReception.appendChild(yardsPerReceptionText);
-                touchdowns.appendChild(touchdownsText);
-            }
+                for (let i = 1; i < res1.data.length; i++){
+                    let newRow = rbTable.insertRow();
+                    if (renderAddButtons){
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        if(claimedRBs.includes(res1.data[i].id)){
+                            buttonCellContent.textContent = `Player Unavailable`;
+                            buttonCellContent.classList.add(`already-added`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                        }
+                        else{
+                            buttonCellContent.textContent = `Add Player`;
+                            buttonCellContent.classList.add(`rb-add-button`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                            buttonCellContent.addEventListener(`click`, addPlayer);
+                        }
+                    }
+                    let name = newRow.insertCell();
+                    name.classList.add(`name-cell`);
+                    let filler = newRow.insertCell();
+                    let team = newRow.insertCell();
+                    let rushingAttempts = newRow.insertCell();
+                    let rushingYards = newRow.insertCell();
+                    let yardsPerCarry = newRow.insertCell();
+                    let receivingTargets = newRow.insertCell();
+                    let receptions = newRow.insertCell();
+                    let receivingYards = newRow.insertCell();
+                    let yardsPerReception = newRow.insertCell();
+                    let touchdowns = newRow.insertCell();
+                    let nameText = document.createTextNode(`${res1.data[i].name}`);
+                    let teamText = document.createTextNode(`${res1.data[i].team}`);
+                    let rushingAttemptsText = document.createTextNode(`${res1.data[i].rushing_attempts}`);
+                    let rushingYardsText = document.createTextNode(`${res1.data[i].rushing_yards}`);
+                    let yardsPerCarryText = document.createTextNode(`${res1.data[i].yards_per_carry}`);
+                    let receivingTargetsText = document.createTextNode(`${res1.data[i].receiving_targets}`);
+                    let receptionsText = document.createTextNode(`${res1.data[i].receptions}`);
+                    let receivingYardsText = document.createTextNode(`${res1.data[i].receiving_yards}`);
+                    let yardsPerReceptionText = document.createTextNode(`${res1.data[i].yards_per_reception}`);
+                    let touchdownsText = document.createTextNode(`${res1.data[i].touchdowns}`);
+                    name.appendChild(nameText);
+                    team.appendChild(teamText);
+                    rushingAttempts.appendChild(rushingAttemptsText);
+                    rushingYards.appendChild(rushingYardsText);
+                    yardsPerCarry.appendChild(yardsPerCarryText);
+                    receivingTargets.appendChild(receivingTargetsText);
+                    receptions.appendChild(receptionsText);
+                    receivingYards.appendChild(receivingYardsText);
+                    yardsPerReception.appendChild(yardsPerReceptionText);
+                    touchdowns.appendChild(touchdownsText);
+                }
+            })
         })
     }
 }
@@ -335,116 +395,146 @@ const displayWRs = (stat, sort) => {
     }
     if(!stat && !sort){
         axios.get(`${baseURL}/widereceivers`)
-        .then(res => {
-            if (renderAddButtons){
-                if (wrHeaders.children[0].id !== `wr-button-column`){
-                    let buttonColumn = document.createElement(`th`);
-                    buttonColumn.id = `wr-button-column`;
-                    wrHeaders.insertBefore(buttonColumn, wrHeaders.children[0])
+        .then(res1 => {
+            axios.get(`${baseURL}/claimedwrs`)
+            .then(res2 => {
+                let claimedWRs = [];
+                for (let i = 0; i < res2.data.length; i++){
+                    claimedWRs.push(res2.data[i].id)
                 }
-            }
-            for (let i = 1; i < res.data.length; i++){
-                let newRow = wrTable.insertRow();
                 if (renderAddButtons){
-                    let buttonCell = newRow.insertCell();
-                    buttonCell.classList.add(`button-cell`);
-                    let buttonCellContent = document.createElement(`button`);
-                    buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`wr-add-button`);
-                    buttonCellContent.id = res.data[i].id;
-                    buttonCell.appendChild(buttonCellContent);
-                    buttonCellContent.addEventListener(`click`, addPlayer);
+                    if (wrHeaders.children[0].id !== `wr-button-column`){
+                        let buttonColumn = document.createElement(`th`);
+                        buttonColumn.id = `wr-button-column`;
+                        wrHeaders.insertBefore(buttonColumn, wrHeaders.children[0])
+                    }
                 }
-                let name = newRow.insertCell();
-                name.classList.add(`name-cell`);
-                let filler = newRow.insertCell();
-                let team = newRow.insertCell();
-                let receivingTargets = newRow.insertCell();
-                let receptions = newRow.insertCell();
-                let receivingYards = newRow.insertCell();
-                let yardsPerReception = newRow.insertCell();
-                let rushingAttempts = newRow.insertCell();
-                let rushingYards = newRow.insertCell();
-                let yardsPerCarry = newRow.insertCell();
-                let touchdowns = newRow.insertCell();
-                let nameText = document.createTextNode(`${res.data[i].name}`);
-                let teamText = document.createTextNode(`${res.data[i].team}`);
-                let receivingTargetsText = document.createTextNode(`${res.data[i].receiving_targets}`);
-                let receptionsText = document.createTextNode(`${res.data[i].receptions}`);
-                let receivingYardsText = document.createTextNode(`${res.data[i].receiving_yards}`);
-                let yardsPerReceptionText = document.createTextNode(`${res.data[i].yards_per_reception}`);
-                let rushingAttemptsText = document.createTextNode(`${res.data[i].rushing_attempts}`);
-                let rushingYardsText = document.createTextNode(`${res.data[i].rushing_yards}`);
-                let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
-                let touchdownsText = document.createTextNode(`${res.data[i].touchdowns}`);
-                name.appendChild(nameText);
-                team.appendChild(teamText);
-                receivingTargets.appendChild(receivingTargetsText);
-                receptions.appendChild(receptionsText);
-                receivingYards.appendChild(receivingYardsText);
-                yardsPerReception.appendChild(yardsPerReceptionText);
-                rushingAttempts.appendChild(rushingAttemptsText);
-                rushingYards.appendChild(rushingYardsText);
-                yardsPerCarry.appendChild(yardsPerCarryText);
-                touchdowns.appendChild(touchdownsText);
-            }
+                for (let i = 1; i < res1.data.length; i++){
+                    let newRow = wrTable.insertRow();
+                    if (renderAddButtons){
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        if(claimedWRs.includes(res1.data[i].id)){
+                            buttonCellContent.textContent = `Player Unavailable`;
+                            buttonCellContent.classList.add(`already-added`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                        }
+                        else{
+                            buttonCellContent.textContent = `Add Player`;
+                            buttonCellContent.classList.add(`wr-add-button`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                            buttonCellContent.addEventListener(`click`, addPlayer);
+                        }
+                    }
+                    let name = newRow.insertCell();
+                    name.classList.add(`name-cell`);
+                    let filler = newRow.insertCell();
+                    let team = newRow.insertCell();
+                    let receivingTargets = newRow.insertCell();
+                    let receptions = newRow.insertCell();
+                    let receivingYards = newRow.insertCell();
+                    let yardsPerReception = newRow.insertCell();
+                    let rushingAttempts = newRow.insertCell();
+                    let rushingYards = newRow.insertCell();
+                    let yardsPerCarry = newRow.insertCell();
+                    let touchdowns = newRow.insertCell();
+                    let nameText = document.createTextNode(`${res1.data[i].name}`);
+                    let teamText = document.createTextNode(`${res1.data[i].team}`);
+                    let receivingTargetsText = document.createTextNode(`${res1.data[i].receiving_targets}`);
+                    let receptionsText = document.createTextNode(`${res1.data[i].receptions}`);
+                    let receivingYardsText = document.createTextNode(`${res1.data[i].receiving_yards}`);
+                    let yardsPerReceptionText = document.createTextNode(`${res1.data[i].yards_per_reception}`);
+                    let rushingAttemptsText = document.createTextNode(`${res1.data[i].rushing_attempts}`);
+                    let rushingYardsText = document.createTextNode(`${res1.data[i].rushing_yards}`);
+                    let yardsPerCarryText = document.createTextNode(`${res1.data[i].yards_per_carry}`);
+                    let touchdownsText = document.createTextNode(`${res1.data[i].touchdowns}`);
+                    name.appendChild(nameText);
+                    team.appendChild(teamText);
+                    receivingTargets.appendChild(receivingTargetsText);
+                    receptions.appendChild(receptionsText);
+                    receivingYards.appendChild(receivingYardsText);
+                    yardsPerReception.appendChild(yardsPerReceptionText);
+                    rushingAttempts.appendChild(rushingAttemptsText);
+                    rushingYards.appendChild(rushingYardsText);
+                    yardsPerCarry.appendChild(yardsPerCarryText);
+                    touchdowns.appendChild(touchdownsText);
+                }
+            })
         })
     }
     else{
         axios.get(`${baseURL}/widereceivers?stat=${stat}&sort=${sort}`)
-        .then(res => {
-            if (renderAddButtons){
-                if (wrHeaders.children[0].id !== `wr-button-column`){
-                    let buttonColumn = document.createElement(`th`);
-                    buttonColumn.id = `wr-button-column`;
-                    rbHeaders.insertBefore(buttonColumn, wrHeaders.children[0])
+        .then(res1 => {
+            axios.get(`${baseURL}/claimedwrs`)
+            .then(res2 => {
+                let claimedWRs = [];
+                for (let i = 0; i < res2.data.length; i++){
+                    claimedWRs.push(res2.data[i].id)
                 }
-            }
-            for (let i = 1; i < res.data.length; i++){
-                let newRow = wrTable.insertRow();
                 if (renderAddButtons){
-                    let buttonCell = newRow.insertCell();
-                    buttonCell.classList.add(`button-cell`);
-                    let buttonCellContent = document.createElement(`button`);
-                    buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`wr-add-button`);
-                    buttonCellContent.id = res.data[i].id;
-                    buttonCell.appendChild(buttonCellContent);
-                    buttonCellContent.addEventListener(`click`, addPlayer);
+                    if (wrHeaders.children[0].id !== `wr-button-column`){
+                        let buttonColumn = document.createElement(`th`);
+                        buttonColumn.id = `wr-button-column`;
+                        wrHeaders.insertBefore(buttonColumn, wrHeaders.children[0])
+                    }
                 }
-                let name = newRow.insertCell();
-                name.classList.add(`name-cell`);
-                let filler = newRow.insertCell();
-                let team = newRow.insertCell();
-                let receivingTargets = newRow.insertCell();
-                let receptions = newRow.insertCell();
-                let receivingYards = newRow.insertCell();
-                let yardsPerReception = newRow.insertCell();
-                let rushingAttempts = newRow.insertCell();
-                let rushingYards = newRow.insertCell();
-                let yardsPerCarry = newRow.insertCell();
-                let touchdowns = newRow.insertCell();
-                let nameText = document.createTextNode(`${res.data[i].name}`);
-                let teamText = document.createTextNode(`${res.data[i].team}`);
-                let receivingTargetsText = document.createTextNode(`${res.data[i].receiving_targets}`);
-                let receptionsText = document.createTextNode(`${res.data[i].receptions}`);
-                let receivingYardsText = document.createTextNode(`${res.data[i].receiving_yards}`);
-                let yardsPerReceptionText = document.createTextNode(`${res.data[i].yards_per_reception}`);
-                let rushingAttemptsText = document.createTextNode(`${res.data[i].rushing_attempts}`);
-                let rushingYardsText = document.createTextNode(`${res.data[i].rushing_yards}`);
-                let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
-                let touchdownsText = document.createTextNode(`${res.data[i].touchdowns}`);
-                name.appendChild(nameText);
-                team.appendChild(teamText);
-                receivingTargets.appendChild(receivingTargetsText);
-                receptions.appendChild(receptionsText);
-                receivingYards.appendChild(receivingYardsText);
-                yardsPerReception.appendChild(yardsPerReceptionText);
-                rushingAttempts.appendChild(rushingAttemptsText);
-                rushingYards.appendChild(rushingYardsText);
-                yardsPerCarry.appendChild(yardsPerCarryText);
-                touchdowns.appendChild(touchdownsText);
-            }
+                for (let i = 1; i < res1.data.length; i++){
+                    let newRow = wrTable.insertRow();
+                    if (renderAddButtons){
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        if(claimedWRs.includes(res1.data[i].id)){
+                            buttonCellContent.textContent = `Player Unavailable`;
+                            buttonCellContent.classList.add(`already-added`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                        }
+                        else{
+                            buttonCellContent.textContent = `Add Player`;
+                            buttonCellContent.classList.add(`wr-add-button`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                            buttonCellContent.addEventListener(`click`, addPlayer);
+                        }
+                    }
+                    let name = newRow.insertCell();
+                    name.classList.add(`name-cell`);
+                    let filler = newRow.insertCell();
+                    let team = newRow.insertCell();
+                    let receivingTargets = newRow.insertCell();
+                    let receptions = newRow.insertCell();
+                    let receivingYards = newRow.insertCell();
+                    let yardsPerReception = newRow.insertCell();
+                    let rushingAttempts = newRow.insertCell();
+                    let rushingYards = newRow.insertCell();
+                    let yardsPerCarry = newRow.insertCell();
+                    let touchdowns = newRow.insertCell();
+                    let nameText = document.createTextNode(`${res1.data[i].name}`);
+                    let teamText = document.createTextNode(`${res1.data[i].team}`);
+                    let receivingTargetsText = document.createTextNode(`${res1.data[i].receiving_targets}`);
+                    let receptionsText = document.createTextNode(`${res1.data[i].receptions}`);
+                    let receivingYardsText = document.createTextNode(`${res1.data[i].receiving_yards}`);
+                    let yardsPerReceptionText = document.createTextNode(`${res1.data[i].yards_per_reception}`);
+                    let rushingAttemptsText = document.createTextNode(`${res1.data[i].rushing_attempts}`);
+                    let rushingYardsText = document.createTextNode(`${res1.data[i].rushing_yards}`);
+                    let yardsPerCarryText = document.createTextNode(`${res1.data[i].yards_per_carry}`);
+                    let touchdownsText = document.createTextNode(`${res1.data[i].touchdowns}`);
+                    name.appendChild(nameText);
+                    team.appendChild(teamText);
+                    receivingTargets.appendChild(receivingTargetsText);
+                    receptions.appendChild(receptionsText);
+                    receivingYards.appendChild(receivingYardsText);
+                    yardsPerReception.appendChild(yardsPerReceptionText);
+                    rushingAttempts.appendChild(rushingAttemptsText);
+                    rushingYards.appendChild(rushingYardsText);
+                    yardsPerCarry.appendChild(yardsPerCarryText);
+                    touchdowns.appendChild(touchdownsText);
+                }
+            })
         })
     }
 }
@@ -455,116 +545,146 @@ const displayTEs = (stat, sort) => {
     }
     if (!stat && !sort){
         axios.get(`${baseURL}/tightends`)
-        .then(res => {
-            if (renderAddButtons){
-                if (teHeaders.children[0].id !== `te-button-column`){
-                    let buttonColumn = document.createElement(`th`);
-                    buttonColumn.id = `te-button-column`;
-                    teHeaders.insertBefore(buttonColumn, teHeaders.children[0])
+        .then(res1 => {
+            axios.get(`${baseURL}/claimedtes`)
+            .then(res2 => {
+                let claimedTEs = [];
+                for (let i = 0; i < res2.data.length; i++){
+                    claimedTEs.push(res2.data[i].id)
                 }
-            }
-            for (let i = 1; i < res.data.length; i++){
-                let newRow = teTable.insertRow();
                 if (renderAddButtons){
-                    let buttonCell = newRow.insertCell();
-                    buttonCell.classList.add(`button-cell`);
-                    let buttonCellContent = document.createElement(`button`);
-                    buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`te-add-button`);
-                    buttonCellContent.id = res.data[i].id;
-                    buttonCell.appendChild(buttonCellContent);
-                    buttonCellContent.addEventListener(`click`, addPlayer);
+                    if (teHeaders.children[0].id !== `te-button-column`){
+                        let buttonColumn = document.createElement(`th`);
+                        buttonColumn.id = `te-button-column`;
+                        teHeaders.insertBefore(buttonColumn, teHeaders.children[0])
+                    }
                 }
-                let name = newRow.insertCell();
-                name.classList.add(`name-cell`);
-                let filler = newRow.insertCell();
-                let team = newRow.insertCell();
-                let receivingTargets = newRow.insertCell();
-                let receptions = newRow.insertCell();
-                let receivingYards = newRow.insertCell();
-                let yardsPerReception = newRow.insertCell();
-                let rushingAttempts = newRow.insertCell();
-                let rushingYards = newRow.insertCell();
-                let yardsPerCarry = newRow.insertCell();
-                let touchdowns = newRow.insertCell();
-                let nameText = document.createTextNode(`${res.data[i].name}`);
-                let teamText = document.createTextNode(`${res.data[i].team}`);
-                let receivingTargetsText = document.createTextNode(`${res.data[i].receiving_targets}`);
-                let receptionsText = document.createTextNode(`${res.data[i].receptions}`);
-                let receivingYardsText = document.createTextNode(`${res.data[i].receiving_yards}`);
-                let yardsPerReceptionText = document.createTextNode(`${res.data[i].yards_per_reception}`);
-                let rushingAttemptsText = document.createTextNode(`${res.data[i].rushing_attempts}`);
-                let rushingYardsText = document.createTextNode(`${res.data[i].rushing_yards}`);
-                let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
-                let touchdownsText = document.createTextNode(`${res.data[i].touchdowns}`);
-                name.appendChild(nameText);
-                team.appendChild(teamText);
-                receivingTargets.appendChild(receivingTargetsText);
-                receptions.appendChild(receptionsText);
-                receivingYards.appendChild(receivingYardsText);
-                yardsPerReception.appendChild(yardsPerReceptionText);
-                rushingAttempts.appendChild(rushingAttemptsText);
-                rushingYards.appendChild(rushingYardsText);
-                yardsPerCarry.appendChild(yardsPerCarryText);
-                touchdowns.appendChild(touchdownsText);
-            }
+                for (let i = 1; i < res1.data.length; i++){
+                    let newRow = teTable.insertRow();
+                    if (renderAddButtons){
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        if(claimedTEs.includes(res1.data[i].id)){
+                            buttonCellContent.textContent = `Player Unavailable`;
+                            buttonCellContent.classList.add(`already-added`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                        }
+                        else{
+                            buttonCellContent.textContent = `Add Player`;
+                            buttonCellContent.classList.add(`te-add-button`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                            buttonCellContent.addEventListener(`click`, addPlayer);
+                        }
+                    }
+                    let name = newRow.insertCell();
+                    name.classList.add(`name-cell`);
+                    let filler = newRow.insertCell();
+                    let team = newRow.insertCell();
+                    let receivingTargets = newRow.insertCell();
+                    let receptions = newRow.insertCell();
+                    let receivingYards = newRow.insertCell();
+                    let yardsPerReception = newRow.insertCell();
+                    let rushingAttempts = newRow.insertCell();
+                    let rushingYards = newRow.insertCell();
+                    let yardsPerCarry = newRow.insertCell();
+                    let touchdowns = newRow.insertCell();
+                    let nameText = document.createTextNode(`${res1.data[i].name}`);
+                    let teamText = document.createTextNode(`${res1.data[i].team}`);
+                    let receivingTargetsText = document.createTextNode(`${res1.data[i].receiving_targets}`);
+                    let receptionsText = document.createTextNode(`${res1.data[i].receptions}`);
+                    let receivingYardsText = document.createTextNode(`${res1.data[i].receiving_yards}`);
+                    let yardsPerReceptionText = document.createTextNode(`${res1.data[i].yards_per_reception}`);
+                    let rushingAttemptsText = document.createTextNode(`${res1.data[i].rushing_attempts}`);
+                    let rushingYardsText = document.createTextNode(`${res1.data[i].rushing_yards}`);
+                    let yardsPerCarryText = document.createTextNode(`${res1.data[i].yards_per_carry}`);
+                    let touchdownsText = document.createTextNode(`${res1.data[i].touchdowns}`);
+                    name.appendChild(nameText);
+                    team.appendChild(teamText);
+                    receivingTargets.appendChild(receivingTargetsText);
+                    receptions.appendChild(receptionsText);
+                    receivingYards.appendChild(receivingYardsText);
+                    yardsPerReception.appendChild(yardsPerReceptionText);
+                    rushingAttempts.appendChild(rushingAttemptsText);
+                    rushingYards.appendChild(rushingYardsText);
+                    yardsPerCarry.appendChild(yardsPerCarryText);
+                    touchdowns.appendChild(touchdownsText);
+                }
+            })
         })
     }
     else{
         axios.get(`${baseURL}/tightends?stat=${stat}&sort=${sort}`)
-        .then(res => {
-            if (renderAddButtons){
-                if (teHeaders.children[0].id !== `te-button-column`){
-                    let buttonColumn = document.createElement(`th`);
-                    buttonColumn.id = `te-button-column`;
-                    teHeaders.insertBefore(buttonColumn, teHeaders.children[0])
+        .then(res1 => {
+            axios.get(`${baseURL}/claimedtes`)
+            .then(res2 => {
+                let claimedTEs = [];
+                for (let i = 0; i < res2.data.length; i++){
+                    claimedTEs.push(res2.data[i].id)
                 }
-            }
-            for (let i = 1; i < res.data.length; i++){
-                let newRow = teTable.insertRow();
                 if (renderAddButtons){
-                    let buttonCell = newRow.insertCell();
-                    buttonCell.classList.add(`button-cell`);
-                    let buttonCellContent = document.createElement(`button`);
-                    buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`te-add-button`);
-                    buttonCellContent.id = res.data[i].id;
-                    buttonCell.appendChild(buttonCellContent);
-                    buttonCellContent.addEventListener(`click`, addPlayer);
+                    if (teHeaders.children[0].id !== `te-button-column`){
+                        let buttonColumn = document.createElement(`th`);
+                        buttonColumn.id = `te-button-column`;
+                        teHeaders.insertBefore(buttonColumn, teHeaders.children[0])
+                    }
                 }
-                let name = newRow.insertCell();
-                name.classList.add(`name-cell`);
-                let filler = newRow.insertCell();
-                let team = newRow.insertCell();
-                let receivingTargets = newRow.insertCell();
-                let receptions = newRow.insertCell();
-                let receivingYards = newRow.insertCell();
-                let yardsPerReception = newRow.insertCell();
-                let rushingAttempts = newRow.insertCell();
-                let rushingYards = newRow.insertCell();
-                let yardsPerCarry = newRow.insertCell();
-                let touchdowns = newRow.insertCell();
-                let nameText = document.createTextNode(`${res.data[i].name}`);
-                let teamText = document.createTextNode(`${res.data[i].team}`);
-                let receivingTargetsText = document.createTextNode(`${res.data[i].receiving_targets}`);
-                let receptionsText = document.createTextNode(`${res.data[i].receptions}`);
-                let receivingYardsText = document.createTextNode(`${res.data[i].receiving_yards}`);
-                let yardsPerReceptionText = document.createTextNode(`${res.data[i].yards_per_reception}`);
-                let rushingAttemptsText = document.createTextNode(`${res.data[i].rushing_attempts}`);
-                let rushingYardsText = document.createTextNode(`${res.data[i].rushing_yards}`);
-                let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
-                let touchdownsText = document.createTextNode(`${res.data[i].touchdowns}`);
-                name.appendChild(nameText);
-                team.appendChild(teamText);
-                receivingTargets.appendChild(receivingTargetsText);
-                receptions.appendChild(receptionsText);
-                receivingYards.appendChild(receivingYardsText);
-                yardsPerReception.appendChild(yardsPerReceptionText);
-                rushingAttempts.appendChild(rushingAttemptsText);
-                rushingYards.appendChild(rushingYardsText);
-                yardsPerCarry.appendChild(yardsPerCarryText);
-                touchdowns.appendChild(touchdownsText);
-            }
+                for (let i = 1; i < res1.data.length; i++){
+                    let newRow = teTable.insertRow();
+                    if (renderAddButtons){
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        if(claimedTEs.includes(res1.data[i].id)){
+                            buttonCellContent.textContent = `Player Unavailable`;
+                            buttonCellContent.classList.add(`already-added`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                        }
+                        else{
+                            buttonCellContent.textContent = `Add Player`;
+                            buttonCellContent.classList.add(`te-add-button`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                            buttonCellContent.addEventListener(`click`, addPlayer);
+                        }
+                    }
+                    let name = newRow.insertCell();
+                    name.classList.add(`name-cell`);
+                    let filler = newRow.insertCell();
+                    let team = newRow.insertCell();
+                    let receivingTargets = newRow.insertCell();
+                    let receptions = newRow.insertCell();
+                    let receivingYards = newRow.insertCell();
+                    let yardsPerReception = newRow.insertCell();
+                    let rushingAttempts = newRow.insertCell();
+                    let rushingYards = newRow.insertCell();
+                    let yardsPerCarry = newRow.insertCell();
+                    let touchdowns = newRow.insertCell();
+                    let nameText = document.createTextNode(`${res1.data[i].name}`);
+                    let teamText = document.createTextNode(`${res1.data[i].team}`);
+                    let receivingTargetsText = document.createTextNode(`${res1.data[i].receiving_targets}`);
+                    let receptionsText = document.createTextNode(`${res1.data[i].receptions}`);
+                    let receivingYardsText = document.createTextNode(`${res1.data[i].receiving_yards}`);
+                    let yardsPerReceptionText = document.createTextNode(`${res1.data[i].yards_per_reception}`);
+                    let rushingAttemptsText = document.createTextNode(`${res1.data[i].rushing_attempts}`);
+                    let rushingYardsText = document.createTextNode(`${res1.data[i].rushing_yards}`);
+                    let yardsPerCarryText = document.createTextNode(`${res1.data[i].yards_per_carry}`);
+                    let touchdownsText = document.createTextNode(`${res1.data[i].touchdowns}`);
+                    name.appendChild(nameText);
+                    team.appendChild(teamText);
+                    receivingTargets.appendChild(receivingTargetsText);
+                    receptions.appendChild(receptionsText);
+                    receivingYards.appendChild(receivingYardsText);
+                    yardsPerReception.appendChild(yardsPerReceptionText);
+                    rushingAttempts.appendChild(rushingAttemptsText);
+                    rushingYards.appendChild(rushingYardsText);
+                    yardsPerCarry.appendChild(yardsPerCarryText);
+                    touchdowns.appendChild(touchdownsText);
+                }
+            })
         })
     }
 }
@@ -575,92 +695,122 @@ const displayKs = (stat, sort) => {
     }
     if (!stat && !sort){
         axios.get(`${baseURL}/kickers`)
-        .then(res => {
-            if (renderAddButtons){
-                if (kHeaders.children[0].id !== `k-button-column`){
-                    let buttonColumn = document.createElement(`th`);
-                    buttonColumn.id = `k-button-column`;
-                    kHeaders.insertBefore(buttonColumn, kHeaders.children[0])
+        .then(res1 => {
+            axios.get(`${baseURL}/claimedks`)
+            .then(res2 => {
+                let claimedKs = [];
+                for (let i = 0; i < res2.data.length; i++){
+                    claimedKs.push(res2.data[i].id)
                 }
-            }
-            for (let i = 1; i < res.data.length; i++){
-                let newRow = kTable.insertRow();
                 if (renderAddButtons){
-                    let buttonCell = newRow.insertCell();
-                    buttonCell.classList.add(`button-cell`);
-                    let buttonCellContent = document.createElement(`button`);
-                    buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`k-add-button`);
-                    buttonCellContent.id = res.data[i].id;
-                    buttonCell.appendChild(buttonCellContent);
-                    buttonCellContent.addEventListener(`click`, addPlayer);
+                    if (kHeaders.children[0].id !== `k-button-column`){
+                        let buttonColumn = document.createElement(`th`);
+                        buttonColumn.id = `k-button-column`;
+                        kHeaders.insertBefore(buttonColumn, kHeaders.children[0])
+                    }
                 }
-                let name = newRow.insertCell();
-                name.classList.add(`name-cell`);
-                let filler = newRow.insertCell();
-                let team = newRow.insertCell();
-                let xpAttempts = newRow.insertCell();
-                let xpMade = newRow.insertCell();
-                let fgAttempts = newRow.insertCell();
-                let fgMade = newRow.insertCell();
-                let nameText = document.createTextNode(`${res.data[i].name}`);
-                let teamText = document.createTextNode(`${res.data[i].team}`);
-                let xpAttemptsText = document.createTextNode(`${res.data[i].xp_attempts}`);
-                let xpMadeText = document.createTextNode(`${res.data[i].xp_made}`);
-                let fgAttemptsText = document.createTextNode(`${res.data[i].fg_attempts}`);
-                let fgMadeText = document.createTextNode(`${res.data[i].fg_made}`);
-                name.appendChild(nameText);
-                team.appendChild(teamText);
-                xpAttempts.appendChild(xpAttemptsText);
-                xpMade.appendChild(xpMadeText);
-                fgAttempts.appendChild(fgAttemptsText);
-                fgMade.appendChild(fgMadeText);
-            }
+                for (let i = 1; i < res1.data.length; i++){
+                    let newRow = kTable.insertRow();
+                    if (renderAddButtons){
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        if(claimedKs.includes(res1.data[i].id)){
+                            buttonCellContent.textContent = `Player Unavailable`;
+                            buttonCellContent.classList.add(`already-added`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                        }
+                        else{
+                            buttonCellContent.textContent = `Add Player`;
+                            buttonCellContent.classList.add(`k-add-button`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                            buttonCellContent.addEventListener(`click`, addPlayer);
+                        }
+                    }
+                    let name = newRow.insertCell();
+                    name.classList.add(`name-cell`);
+                    let filler = newRow.insertCell();
+                    let team = newRow.insertCell();
+                    let xpAttempts = newRow.insertCell();
+                    let xpMade = newRow.insertCell();
+                    let fgAttempts = newRow.insertCell();
+                    let fgMade = newRow.insertCell();
+                    let nameText = document.createTextNode(`${res1.data[i].name}`);
+                    let teamText = document.createTextNode(`${res1.data[i].team}`);
+                    let xpAttemptsText = document.createTextNode(`${res1.data[i].xp_attempts}`);
+                    let xpMadeText = document.createTextNode(`${res1.data[i].xp_made}`);
+                    let fgAttemptsText = document.createTextNode(`${res1.data[i].fg_attempts}`);
+                    let fgMadeText = document.createTextNode(`${res1.data[i].fg_made}`);
+                    name.appendChild(nameText);
+                    team.appendChild(teamText);
+                    xpAttempts.appendChild(xpAttemptsText);
+                    xpMade.appendChild(xpMadeText);
+                    fgAttempts.appendChild(fgAttemptsText);
+                    fgMade.appendChild(fgMadeText);
+                }
+            })
         })
     }
     else{
         axios.get(`${baseURL}/kickers?stat=${stat}&sort=${sort}`)
-        .then(res => {
-            if (renderAddButtons){
-                if (kHeaders.children[0].id !== `k-button-column`){
-                    let buttonColumn = document.createElement(`th`);
-                    buttonColumn.id = `k-button-column`;
-                    kHeaders.insertBefore(buttonColumn, kHeaders.children[0])
+        .then(res1 => {
+            axios.get(`${baseURL}/claimedks`)
+            .then(res2 => {
+                let claimedKs = [];
+                for (let i = 0; i < res2.data.length; i++){
+                    claimedKs.push(res2.data[i].id)
                 }
-            }
-            for (let i = 1; i < res.data.length; i++){
-                let newRow = kTable.insertRow();
                 if (renderAddButtons){
-                    let buttonCell = newRow.insertCell();
-                    buttonCell.classList.add(`button-cell`);
-                    let buttonCellContent = document.createElement(`button`);
-                    buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`k-add-button`);
-                    buttonCellContent.id = res.data[i].id;
-                    buttonCell.appendChild(buttonCellContent);
-                    buttonCellContent.addEventListener(`click`, addPlayer);
+                    if (kHeaders.children[0].id !== `k-button-column`){
+                        let buttonColumn = document.createElement(`th`);
+                        buttonColumn.id = `k-button-column`;
+                        kHeaders.insertBefore(buttonColumn, kHeaders.children[0])
+                    }
                 }
-                let name = newRow.insertCell();
-                name.classList.add(`name-cell`);
-                let filler = newRow.insertCell();
-                let team = newRow.insertCell();
-                let xpAttempts = newRow.insertCell();
-                let xpMade = newRow.insertCell();
-                let fgAttempts = newRow.insertCell();
-                let fgMade = newRow.insertCell();
-                let nameText = document.createTextNode(`${res.data[i].name}`);
-                let teamText = document.createTextNode(`${res.data[i].team}`);
-                let xpAttemptsText = document.createTextNode(`${res.data[i].xp_attempts}`);
-                let xpMadeText = document.createTextNode(`${res.data[i].xp_made}`);
-                let fgAttemptsText = document.createTextNode(`${res.data[i].fg_attempts}`);
-                let fgMadeText = document.createTextNode(`${res.data[i].fg_made}`);
-                name.appendChild(nameText);
-                team.appendChild(teamText);
-                xpAttempts.appendChild(xpAttemptsText);
-                xpMade.appendChild(xpMadeText);
-                fgAttempts.appendChild(fgAttemptsText);
-                fgMade.appendChild(fgMadeText);
-            }
+                for (let i = 1; i < res1.data.length; i++){
+                    let newRow = kTable.insertRow();
+                    if (renderAddButtons){
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        if(claimedKs.includes(res1.data[i].id)){
+                            buttonCellContent.textContent = `Player Unavailable`;
+                            buttonCellContent.classList.add(`already-added`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                        }
+                        else{
+                            buttonCellContent.textContent = `Add Player`;
+                            buttonCellContent.classList.add(`k-add-button`);
+                            buttonCellContent.id = res1.data[i].id;
+                            buttonCell.appendChild(buttonCellContent);
+                            buttonCellContent.addEventListener(`click`, addPlayer);
+                        }
+                    }
+                    let name = newRow.insertCell();
+                    name.classList.add(`name-cell`);
+                    let filler = newRow.insertCell();
+                    let team = newRow.insertCell();
+                    let xpAttempts = newRow.insertCell();
+                    let xpMade = newRow.insertCell();
+                    let fgAttempts = newRow.insertCell();
+                    let fgMade = newRow.insertCell();
+                    let nameText = document.createTextNode(`${res1.data[i].name}`);
+                    let teamText = document.createTextNode(`${res1.data[i].team}`);
+                    let xpAttemptsText = document.createTextNode(`${res1.data[i].xp_attempts}`);
+                    let xpMadeText = document.createTextNode(`${res1.data[i].xp_made}`);
+                    let fgAttemptsText = document.createTextNode(`${res1.data[i].fg_attempts}`);
+                    let fgMadeText = document.createTextNode(`${res1.data[i].fg_made}`);
+                    name.appendChild(nameText);
+                    team.appendChild(teamText);
+                    xpAttempts.appendChild(xpAttemptsText);
+                    xpMade.appendChild(xpMadeText);
+                    fgAttempts.appendChild(fgAttemptsText);
+                    fgMade.appendChild(fgMadeText);
+                }
+            })
         })
     }
 }
@@ -752,6 +902,7 @@ const addPlayer = event => {
             axios.put(`${baseURL}/kickers?user=${res.data.userID}&player=${event.target.id}`)
             .then(res => alert(res.data))
         }
+        location.reload();
     })
 }
 

@@ -5,7 +5,7 @@ const session = require(`express-session`);
 const app = express();
 const {SERVER_PORT} = process.env;
 const { seed } = require('./seed.js');
-const { getAuth, endSession, createUser, loginUser, getUsers, getPlayers, getTeams, getPositions, getQBStats, getRBStats, getWRStats, getTEStats, getKickerStats,addQB, addRB, addWR, addTE, addK } = require(`./controller.js`)
+const { getAuth, endSession, createUser, loginUser, getUsers, getPlayers, getTeams, getPositions, getQBStats, getRBStats, getWRStats, getTEStats, getKickerStats,addQB, addRB, addWR, addTE, addK, getClaimedQBs, getClaimedRBs, getClaimedWRs, getClaimedTEs, getClaimedKs } = require(`./controller.js`)
 
 app.use(session({
     name: `ML Session`,
@@ -37,5 +37,10 @@ app.get(`/tightends`, getTEStats);
 app.put(`/tightends`, addTE);
 app.get(`/kickers`, getKickerStats);
 app.put(`/kickers`, addK);
+app.get(`/claimedqbs`, getClaimedQBs);
+app.get(`/claimedrbs`, getClaimedRBs);
+app.get(`/claimedwrs`, getClaimedWRs);
+app.get(`/claimedtes`, getClaimedTEs);
+app.get(`/claimedks`, getClaimedKs);
 
 app.listen(SERVER_PORT, () => console.log(`up on ${SERVER_PORT}`));

@@ -262,5 +262,25 @@ module.exports = {
         let { user, player } = req.query;
         sequelize.query(`UPDATE kickers SET user_team = ${user} WHERE id = ${player}`)
         .then(dbres => res.status(200).send(`Player added to your team!`))
+    },
+    getClaimedQBs: (req, res) => {
+        sequelize.query(`SELECT * FROM quarterbacks WHERE user_team IS NOT NULL`)
+        .then(dbres => res.status(200).send(dbres[0]))
+    },
+    getClaimedRBs: (req, res) => {
+        sequelize.query(`SELECT sk.*, p.position FROM skill_positions sk JOIN players p ON sk.id = p.player_id WHERE sk.user_team IS NOT NULL AND p.position = 2`)
+        .then(dbres => res.status(200).send(dbres[0]))
+    },
+    getClaimedWRs: (req, res) => {
+        sequelize.query(`SELECT sk.*, p.position FROM skill_positions sk JOIN players p ON sk.id = p.player_id WHERE sk.user_team IS NOT NULL AND p.position = 3`)
+        .then(dbres => res.status(200).send(dbres[0]))
+    },
+    getClaimedTEs: (req, res) => {
+        sequelize.query(`SELECT sk.*, p.position FROM skill_positions sk JOIN players p ON sk.id = p.player_id WHERE sk.user_team IS NOT NULL AND p.position = 4`)
+        .then(dbres => res.status(200).send(dbres[0]))
+    },
+    getClaimedKs: (req, res) => {
+        sequelize.query(`SELECT * FROM kickers WHERE user_team IS NOT NULL`)
+        .then(dbres => res.status(200).send(dbres[0]))
     }
 }
