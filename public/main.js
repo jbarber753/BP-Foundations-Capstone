@@ -30,7 +30,7 @@ const checkAuth = () => {
             loginButton.style.display = `none`;
             logoutButton.style.display = `inline`;
             teamButton.style.display = `inline`;
-            teamButton.textContent = `${res.data}'s Team`;
+            teamButton.textContent = `${res.data.username}'s Team`;
             renderAddButtons = true;
         }
     })
@@ -104,8 +104,10 @@ const displayQBs = (stat, sort) => {
                     buttonCell.classList.add(`button-cell`);
                     let buttonCellContent = document.createElement(`button`);
                     buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`add-button`);
+                    buttonCellContent.classList.add(`qb-add-button`);
+                    buttonCellContent.id = res.data[i].id;
                     buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, addPlayer);
                 }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
@@ -162,8 +164,10 @@ const displayQBs = (stat, sort) => {
                     buttonCell.classList.add(`button-cell`);
                     let buttonCellContent = document.createElement(`button`);
                     buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`add-button`);
+                    buttonCellContent.classList.add(`qb-add-button`);
+                    buttonCellContent.id = res.data[i].id;
                     buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, addPlayer);
                 }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
@@ -226,8 +230,10 @@ const displayRBs = (stat, sort) => {
                     buttonCell.classList.add(`button-cell`);
                     let buttonCellContent = document.createElement(`button`);
                     buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`add-button`);
+                    buttonCellContent.classList.add(`rb-add-button`);
+                    buttonCellContent.id = res.data[i].id;
                     buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, addPlayer);
                 }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
@@ -281,8 +287,10 @@ const displayRBs = (stat, sort) => {
                     buttonCell.classList.add(`button-cell`);
                     let buttonCellContent = document.createElement(`button`);
                     buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`add-button`);
+                    buttonCellContent.classList.add(`rb-add-button`);
+                    buttonCellContent.id = res.data[i].id;
                     buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, addPlayer);
                 }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
@@ -342,8 +350,10 @@ const displayWRs = (stat, sort) => {
                     buttonCell.classList.add(`button-cell`);
                     let buttonCellContent = document.createElement(`button`);
                     buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`add-button`);
+                    buttonCellContent.classList.add(`wr-add-button`);
+                    buttonCellContent.id = res.data[i].id;
                     buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, addPlayer);
                 }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
@@ -397,8 +407,10 @@ const displayWRs = (stat, sort) => {
                     buttonCell.classList.add(`button-cell`);
                     let buttonCellContent = document.createElement(`button`);
                     buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`add-button`);
+                    buttonCellContent.classList.add(`wr-add-button`);
+                    buttonCellContent.id = res.data[i].id;
                     buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, addPlayer);
                 }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
@@ -458,8 +470,10 @@ const displayTEs = (stat, sort) => {
                     buttonCell.classList.add(`button-cell`);
                     let buttonCellContent = document.createElement(`button`);
                     buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`add-button`);
+                    buttonCellContent.classList.add(`te-add-button`);
+                    buttonCellContent.id = res.data[i].id;
                     buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, addPlayer);
                 }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
@@ -513,8 +527,10 @@ const displayTEs = (stat, sort) => {
                     buttonCell.classList.add(`button-cell`);
                     let buttonCellContent = document.createElement(`button`);
                     buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`add-button`);
+                    buttonCellContent.classList.add(`te-add-button`);
+                    buttonCellContent.id = res.data[i].id;
                     buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, addPlayer);
                 }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
@@ -574,8 +590,10 @@ const displayKs = (stat, sort) => {
                     buttonCell.classList.add(`button-cell`);
                     let buttonCellContent = document.createElement(`button`);
                     buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`add-button`);
+                    buttonCellContent.classList.add(`k-add-button`);
+                    buttonCellContent.id = res.data[i].id;
                     buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, addPlayer);
                 }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
@@ -617,8 +635,10 @@ const displayKs = (stat, sort) => {
                     buttonCell.classList.add(`button-cell`);
                     let buttonCellContent = document.createElement(`button`);
                     buttonCellContent.textContent = `Add Player`;
-                    buttonCellContent.classList.add(`add-button`);
+                    buttonCellContent.classList.add(`k-add-button`);
+                    buttonCellContent.id = res.data[i].id;
                     buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, addPlayer);
                 }
                 let name = newRow.insertCell();
                 name.classList.add(`name-cell`);
@@ -705,6 +725,34 @@ const handleSort = event => {
             }
             break;
     }
+}
+
+const addPlayer = event => {
+    console.log(event.target.id)
+    console.log(event.target.className)
+    axios.get(`${baseURL}/auth`)
+    .then(res => {
+        if (event.target.className === `qb-add-button`){
+            axios.put(`${baseURL}/quarterbacks?user=${res.data.userID}&player=${event.target.id}`)
+            .then(res => alert(res.data))
+        }
+        else if (event.target.className === `rb-add-button`){
+            axios.put(`${baseURL}/runningbacks?user=${res.data.userID}&player=${event.target.id}`)
+            .then(res => alert(res.data))
+        }
+        else if (event.target.className === `wr-add-button`){
+            axios.put(`${baseURL}/widereceivers?user=${res.data.userID}&player=${event.target.id}`)
+            .then(res => alert(res.data))
+        }
+        else if (event.target.className === `te-add-button`){
+            axios.put(`${baseURL}/tightends?user=${res.data.userID}&player=${event.target.id}`)
+            .then(res => alert(res.data))
+        }
+        else if (event.target.className === `k-add-button`){
+            axios.put(`${baseURL}/kickers?user=${res.data.userID}&player=${event.target.id}`)
+            .then(res => alert(res.data))
+        }
+    })
 }
 
 checkAuth();

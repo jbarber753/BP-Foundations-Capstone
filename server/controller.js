@@ -17,7 +17,7 @@ const sequelize = new Sequelize(CONNECTION_STRING,
 module.exports = {
     getAuth: (req, res) => {
         if (req.session.userID){
-            res.status(200).send(req.session.userID)
+            res.status(200).send(req.session)
         }
         else{
             res.status(200).send(``)
@@ -76,7 +76,8 @@ module.exports = {
                           res.status(401).send(`Invalid credentials`)
                         }
                         else{
-                            req.session.userID = username;
+                            req.session.username = username;
+                            req.session.userID = dbres[0][0].id;
                             res.status(200).send(req.session)
                         }
                     }
@@ -154,6 +155,12 @@ module.exports = {
         }
     },
 
+    addQB: (req, res) => {
+        let { user, player } = req.query;
+        sequelize.query(`UPDATE quarterbacks SET user_team = ${user} WHERE id = ${player}`)
+        .then(dbres => res.status(200).send(`Player added to your team!`))
+    },
+
     getRBStats: (req, res) => {
         let { stat, sort } = req.query;
         if (!stat && !sort){
@@ -172,6 +179,12 @@ module.exports = {
             })
             .catch(error => console.log(error))
         }
+    },
+
+    addRB: (req, res) => {
+        let { user, player } = req.query;
+        sequelize.query(`UPDATE skill_positions SET user_team = ${user} WHERE id = ${player}`)
+        .then(dbres => res.status(200).send(`Player added to your team!`))
     },
 
     getWRStats: (req, res) => {
@@ -194,6 +207,12 @@ module.exports = {
         }
     },
 
+    addWR: (req, res) => {
+        let { user, player } = req.query;
+        sequelize.query(`UPDATE skill_positions SET user_team = ${user} WHERE id = ${player}`)
+        .then(dbres => res.status(200).send(`Player added to your team!`))
+    },
+
     getTEStats: (req, res) => {
         let { stat, sort } = req.query;
         if (!stat && !sort){
@@ -214,6 +233,12 @@ module.exports = {
         }
     },
 
+    addTE: (req, res) => {
+        let { user, player } = req.query;
+        sequelize.query(`UPDATE skill_positions SET user_team = ${user} WHERE id = ${player}`)
+        .then(dbres => res.status(200).send(`Player added to your team!`))
+    },
+
     getKickerStats: (req, res) => {
         let { stat, sort } = req.query;
         if (!stat && !sort){
@@ -232,5 +257,10 @@ module.exports = {
             })
             .catch(error => console.log(error))
         }
+    },
+    addK: (req, res) => {
+        let { user, player } = req.query;
+        sequelize.query(`UPDATE kickers SET user_team = ${user} WHERE id = ${player}`)
+        .then(dbres => res.status(200).send(`Player added to your team!`))
     }
 }

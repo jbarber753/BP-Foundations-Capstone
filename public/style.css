@@ -105,7 +105,7 @@ td, th{
     padding-left: 20px;
 }
 
-.add-button{
+.qb-add-button, .rb-add-button, .wr-add-button, .te-add-button, .k-add-button{
     background-color: red;
     color: white;
     border: none;
@@ -116,7 +116,7 @@ td, th{
     border-image: initial;
 }
 
-.add-button:hover{
+.qb-add-button:hover, .rb-add-button:hover, .wr-add-button:hover, .te-add-button:hover, .k-add-button:hover{
     cursor: pointer;
     background-color: rgb(211, 0, 0);
 }
