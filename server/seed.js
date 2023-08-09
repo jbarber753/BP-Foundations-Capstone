@@ -59,7 +59,8 @@ module.exports = {
               interceptions INTEGER,
               rushing_attempts INTEGER,
               rushing_yards INTEGER,
-              rushing_tds INTEGER
+              rushing_tds INTEGER,
+              user_team INTEGER REFERENCES users(id)
             );
 
             CREATE TABLE skill_positions (
@@ -68,13 +69,15 @@ module.exports = {
               rushing_yards INTEGER,
               receiving_targets INTEGER,
               receiving_yards INTEGER,
-              touchdowns INTEGER
+              touchdowns INTEGER,
+              user_team INTEGER REFERENCES users(id)
             );
 
             CREATE TABLE kickers (
               id INTEGER REFERENCES players(player_id),
               xp_attempts INTEGER,
-              fg_attempts INTEGER
+              fg_attempts INTEGER,
+              user_team INTEGER REFERENCES users(id)
             );
 
             INSERT INTO teams (location, name) VALUES
