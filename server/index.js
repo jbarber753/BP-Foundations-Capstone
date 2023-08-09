@@ -4,8 +4,8 @@ const cors = require('cors');
 const session = require(`express-session`);
 const app = express();
 const {SERVER_PORT} = process.env;
-const { seed } = require('./server/seed.js');
-const { getAuth, endSession, createUser, loginUser, getUsers, getPlayers, getTeams, getPositions, getQBStats, getRBStats, getWRStats, getTEStats, getKickerStats } = require(`./server/controller.js`)
+const { seed } = require('./seed.js');
+const { getAuth, endSession, createUser, loginUser, getUsers, getPlayers, getTeams, getPositions, getQBStats, getRBStats, getWRStats, getTEStats, getKickerStats } = require(`./controller.js`)
 
 app.use(session({
     name: `ML Session`,
@@ -16,7 +16,7 @@ app.use(session({
 }));
 app.use(express.json());
 app.use(cors());
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/../public`));
 
 app.post(`/seed`, seed);
 app.get(`/auth`, getAuth);

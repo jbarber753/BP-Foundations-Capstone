@@ -1,0 +1,35 @@
+body{
+    margin: 0;
+}
+
+header{
+    font-family: 'Teko', sans-serif;
+    font-size: 48px;
+    font-style: italic;
+    color: white;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+nav{
+    font-size: 24px;
+    font-style: normal;
+}
+
+a{
+    margin-right: 30px;
+    text-decoration: none;
+    color: white;
+}
+
+#logout-nav{
+    display: none;
+}
+
+a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}

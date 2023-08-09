@@ -92,13 +92,17 @@ th{
     margin: 0 20px;
 }
 
-.table-label span{
-    display: flex;
-    min-width: max-content;
-}
-
 td, th{
     text-align: center;
+}
+
+.filler{
+    width: 50px;
+    display: block;
+}
+
+.name-cell{
+    padding-left: 20px;
 }
 
 .inactive:hover{

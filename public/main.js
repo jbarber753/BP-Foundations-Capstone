@@ -85,6 +85,9 @@ const displayQBs = (stat, sort) => {
             for (let i = 1; i < res.data.length; i++){
                 let newRow = qbTable.insertRow();
                 let name = newRow.insertCell();
+                name.classList.add(`name-cell`);
+                let filler = newRow.insertCell();
+                let team = newRow.insertCell();
                 let passAttempts = newRow.insertCell();
                 let completions = newRow.insertCell();
                 let passingYards = newRow.insertCell();
@@ -95,6 +98,7 @@ const displayQBs = (stat, sort) => {
                 let yardsPerCarry = newRow.insertCell();
                 let rushingTDs = newRow.insertCell();
                 let nameText = document.createTextNode(`${res.data[i].name}`);
+                let teamText = document.createTextNode(`${res.data[i].team}`);
                 let passAttemptsText = document.createTextNode(`${res.data[i].pass_attempts}`);
                 let completionsText = document.createTextNode(`${res.data[i].completions}`);
                 let passingYardsText = document.createTextNode(`${res.data[i].passing_yards}`);
@@ -105,6 +109,7 @@ const displayQBs = (stat, sort) => {
                 let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
                 let rushingTDsText = document.createTextNode(`${res.data[i].rushing_tds}`);
                 name.appendChild(nameText);
+                team.appendChild(teamText);
                 passAttempts.appendChild(passAttemptsText);
                 completions.appendChild(completionsText);
                 passingYards.appendChild(passingYardsText);
@@ -123,6 +128,9 @@ const displayQBs = (stat, sort) => {
             for (let i = 1; i < res.data.length; i++){
                 let newRow = qbTable.insertRow();
                 let name = newRow.insertCell();
+                name.classList.add(`name-cell`);
+                let filler = newRow.insertCell();
+                let team = newRow.insertCell();
                 let passAttempts = newRow.insertCell();
                 let completions = newRow.insertCell();
                 let passingYards = newRow.insertCell();
@@ -133,6 +141,7 @@ const displayQBs = (stat, sort) => {
                 let yardsPerCarry = newRow.insertCell();
                 let rushingTDs = newRow.insertCell();
                 let nameText = document.createTextNode(`${res.data[i].name}`);
+                let teamText = document.createTextNode(`${res.data[i].team}`);
                 let passAttemptsText = document.createTextNode(`${res.data[i].pass_attempts}`);
                 let completionsText = document.createTextNode(`${res.data[i].completions}`);
                 let passingYardsText = document.createTextNode(`${res.data[i].passing_yards}`);
@@ -143,6 +152,7 @@ const displayQBs = (stat, sort) => {
                 let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
                 let rushingTDsText = document.createTextNode(`${res.data[i].rushing_tds}`);
                 name.appendChild(nameText);
+                team.appendChild(teamText);
                 passAttempts.appendChild(passAttemptsText);
                 completions.appendChild(completionsText);
                 passingYards.appendChild(passingYardsText);
@@ -167,6 +177,9 @@ const displayRBs = (stat, sort) => {
             for (let i = 1; i < res.data.length; i++){
                 let newRow = rbTable.insertRow();
                 let name = newRow.insertCell();
+                name.classList.add(`name-cell`);
+                let filler = newRow.insertCell();
+                let team = newRow.insertCell();
                 let rushingAttempts = newRow.insertCell();
                 let rushingYards = newRow.insertCell();
                 let yardsPerCarry = newRow.insertCell();
@@ -176,6 +189,7 @@ const displayRBs = (stat, sort) => {
                 let yardsPerReception = newRow.insertCell();
                 let touchdowns = newRow.insertCell();
                 let nameText = document.createTextNode(`${res.data[i].name}`);
+                let teamText = document.createTextNode(`${res.data[i].team}`);
                 let rushingAttemptsText = document.createTextNode(`${res.data[i].rushing_attempts}`);
                 let rushingYardsText = document.createTextNode(`${res.data[i].rushing_yards}`);
                 let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
@@ -185,6 +199,7 @@ const displayRBs = (stat, sort) => {
                 let yardsPerReceptionText = document.createTextNode(`${res.data[i].yards_per_reception}`);
                 let touchdownsText = document.createTextNode(`${res.data[i].touchdowns}`);
                 name.appendChild(nameText);
+                team.appendChild(teamText);
                 rushingAttempts.appendChild(rushingAttemptsText);
                 rushingYards.appendChild(rushingYardsText);
                 yardsPerCarry.appendChild(yardsPerCarryText);
@@ -202,6 +217,9 @@ const displayRBs = (stat, sort) => {
             for (let i = 1; i < res.data.length; i++){
                 let newRow = rbTable.insertRow();
                 let name = newRow.insertCell();
+                name.classList.add(`name-cell`);
+                let filler = newRow.insertCell();
+                let team = newRow.insertCell();
                 let rushingAttempts = newRow.insertCell();
                 let rushingYards = newRow.insertCell();
                 let yardsPerCarry = newRow.insertCell();
@@ -211,6 +229,7 @@ const displayRBs = (stat, sort) => {
                 let yardsPerReception = newRow.insertCell();
                 let touchdowns = newRow.insertCell();
                 let nameText = document.createTextNode(`${res.data[i].name}`);
+                let teamText = document.createTextNode(`${res.data[i].team}`);
                 let rushingAttemptsText = document.createTextNode(`${res.data[i].rushing_attempts}`);
                 let rushingYardsText = document.createTextNode(`${res.data[i].rushing_yards}`);
                 let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
@@ -220,6 +239,7 @@ const displayRBs = (stat, sort) => {
                 let yardsPerReceptionText = document.createTextNode(`${res.data[i].yards_per_reception}`);
                 let touchdownsText = document.createTextNode(`${res.data[i].touchdowns}`);
                 name.appendChild(nameText);
+                team.appendChild(teamText);
                 rushingAttempts.appendChild(rushingAttemptsText);
                 rushingYards.appendChild(rushingYardsText);
                 yardsPerCarry.appendChild(yardsPerCarryText);
@@ -243,6 +263,9 @@ const displayWRs = (stat, sort) => {
             for (let i = 1; i < res.data.length; i++){
                 let newRow = wrTable.insertRow();
                 let name = newRow.insertCell();
+                name.classList.add(`name-cell`);
+                let filler = newRow.insertCell();
+                let team = newRow.insertCell();
                 let receivingTargets = newRow.insertCell();
                 let receptions = newRow.insertCell();
                 let receivingYards = newRow.insertCell();
@@ -252,6 +275,7 @@ const displayWRs = (stat, sort) => {
                 let yardsPerCarry = newRow.insertCell();
                 let touchdowns = newRow.insertCell();
                 let nameText = document.createTextNode(`${res.data[i].name}`);
+                let teamText = document.createTextNode(`${res.data[i].team}`);
                 let receivingTargetsText = document.createTextNode(`${res.data[i].receiving_targets}`);
                 let receptionsText = document.createTextNode(`${res.data[i].receptions}`);
                 let receivingYardsText = document.createTextNode(`${res.data[i].receiving_yards}`);
@@ -261,6 +285,7 @@ const displayWRs = (stat, sort) => {
                 let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
                 let touchdownsText = document.createTextNode(`${res.data[i].touchdowns}`);
                 name.appendChild(nameText);
+                team.appendChild(teamText);
                 receivingTargets.appendChild(receivingTargetsText);
                 receptions.appendChild(receptionsText);
                 receivingYards.appendChild(receivingYardsText);
@@ -278,6 +303,9 @@ const displayWRs = (stat, sort) => {
             for (let i = 1; i < res.data.length; i++){
                 let newRow = wrTable.insertRow();
                 let name = newRow.insertCell();
+                name.classList.add(`name-cell`);
+                let filler = newRow.insertCell();
+                let team = newRow.insertCell();
                 let receivingTargets = newRow.insertCell();
                 let receptions = newRow.insertCell();
                 let receivingYards = newRow.insertCell();
@@ -287,6 +315,7 @@ const displayWRs = (stat, sort) => {
                 let yardsPerCarry = newRow.insertCell();
                 let touchdowns = newRow.insertCell();
                 let nameText = document.createTextNode(`${res.data[i].name}`);
+                let teamText = document.createTextNode(`${res.data[i].team}`);
                 let receivingTargetsText = document.createTextNode(`${res.data[i].receiving_targets}`);
                 let receptionsText = document.createTextNode(`${res.data[i].receptions}`);
                 let receivingYardsText = document.createTextNode(`${res.data[i].receiving_yards}`);
@@ -296,6 +325,7 @@ const displayWRs = (stat, sort) => {
                 let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
                 let touchdownsText = document.createTextNode(`${res.data[i].touchdowns}`);
                 name.appendChild(nameText);
+                team.appendChild(teamText);
                 receivingTargets.appendChild(receivingTargetsText);
                 receptions.appendChild(receptionsText);
                 receivingYards.appendChild(receivingYardsText);
@@ -319,6 +349,9 @@ const displayTEs = (stat, sort) => {
             for (let i = 1; i < res.data.length; i++){
                 let newRow = teTable.insertRow();
                 let name = newRow.insertCell();
+                name.classList.add(`name-cell`);
+                let filler = newRow.insertCell();
+                let team = newRow.insertCell();
                 let receivingTargets = newRow.insertCell();
                 let receptions = newRow.insertCell();
                 let receivingYards = newRow.insertCell();
@@ -328,6 +361,7 @@ const displayTEs = (stat, sort) => {
                 let yardsPerCarry = newRow.insertCell();
                 let touchdowns = newRow.insertCell();
                 let nameText = document.createTextNode(`${res.data[i].name}`);
+                let teamText = document.createTextNode(`${res.data[i].team}`);
                 let receivingTargetsText = document.createTextNode(`${res.data[i].receiving_targets}`);
                 let receptionsText = document.createTextNode(`${res.data[i].receptions}`);
                 let receivingYardsText = document.createTextNode(`${res.data[i].receiving_yards}`);
@@ -337,6 +371,7 @@ const displayTEs = (stat, sort) => {
                 let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
                 let touchdownsText = document.createTextNode(`${res.data[i].touchdowns}`);
                 name.appendChild(nameText);
+                team.appendChild(teamText);
                 receivingTargets.appendChild(receivingTargetsText);
                 receptions.appendChild(receptionsText);
                 receivingYards.appendChild(receivingYardsText);
@@ -354,6 +389,9 @@ const displayTEs = (stat, sort) => {
             for (let i = 1; i < res.data.length; i++){
                 let newRow = teTable.insertRow();
                 let name = newRow.insertCell();
+                name.classList.add(`name-cell`);
+                let filler = newRow.insertCell();
+                let team = newRow.insertCell();
                 let receivingTargets = newRow.insertCell();
                 let receptions = newRow.insertCell();
                 let receivingYards = newRow.insertCell();
@@ -363,6 +401,7 @@ const displayTEs = (stat, sort) => {
                 let yardsPerCarry = newRow.insertCell();
                 let touchdowns = newRow.insertCell();
                 let nameText = document.createTextNode(`${res.data[i].name}`);
+                let teamText = document.createTextNode(`${res.data[i].team}`);
                 let receivingTargetsText = document.createTextNode(`${res.data[i].receiving_targets}`);
                 let receptionsText = document.createTextNode(`${res.data[i].receptions}`);
                 let receivingYardsText = document.createTextNode(`${res.data[i].receiving_yards}`);
@@ -372,6 +411,7 @@ const displayTEs = (stat, sort) => {
                 let yardsPerCarryText = document.createTextNode(`${res.data[i].yards_per_carry}`);
                 let touchdownsText = document.createTextNode(`${res.data[i].touchdowns}`);
                 name.appendChild(nameText);
+                team.appendChild(teamText);
                 receivingTargets.appendChild(receivingTargetsText);
                 receptions.appendChild(receptionsText);
                 receivingYards.appendChild(receivingYardsText);
@@ -395,16 +435,21 @@ const displayKs = (stat, sort) => {
             for (let i = 1; i < res.data.length; i++){
                 let newRow = kTable.insertRow();
                 let name = newRow.insertCell();
+                name.classList.add(`name-cell`);
+                let filler = newRow.insertCell();
+                let team = newRow.insertCell();
                 let xpAttempts = newRow.insertCell();
                 let xpMade = newRow.insertCell();
                 let fgAttempts = newRow.insertCell();
                 let fgMade = newRow.insertCell();
                 let nameText = document.createTextNode(`${res.data[i].name}`);
+                let teamText = document.createTextNode(`${res.data[i].team}`);
                 let xpAttemptsText = document.createTextNode(`${res.data[i].xp_attempts}`);
                 let xpMadeText = document.createTextNode(`${res.data[i].xp_made}`);
                 let fgAttemptsText = document.createTextNode(`${res.data[i].fg_attempts}`);
                 let fgMadeText = document.createTextNode(`${res.data[i].fg_made}`);
                 name.appendChild(nameText);
+                team.appendChild(teamText);
                 xpAttempts.appendChild(xpAttemptsText);
                 xpMade.appendChild(xpMadeText);
                 fgAttempts.appendChild(fgAttemptsText);
@@ -418,16 +463,21 @@ const displayKs = (stat, sort) => {
             for (let i = 1; i < res.data.length; i++){
                 let newRow = kTable.insertRow();
                 let name = newRow.insertCell();
+                name.classList.add(`name-cell`);
+                let filler = newRow.insertCell();
+                let team = newRow.insertCell();
                 let xpAttempts = newRow.insertCell();
                 let xpMade = newRow.insertCell();
                 let fgAttempts = newRow.insertCell();
                 let fgMade = newRow.insertCell();
                 let nameText = document.createTextNode(`${res.data[i].name}`);
+                let teamText = document.createTextNode(`${res.data[i].team}`);
                 let xpAttemptsText = document.createTextNode(`${res.data[i].xp_attempts}`);
                 let xpMadeText = document.createTextNode(`${res.data[i].xp_made}`);
                 let fgAttemptsText = document.createTextNode(`${res.data[i].fg_attempts}`);
                 let fgMadeText = document.createTextNode(`${res.data[i].fg_made}`);
                 name.appendChild(nameText);
+                team.appendChild(teamText);
                 xpAttempts.appendChild(xpAttemptsText);
                 xpMade.appendChild(xpMadeText);
                 fgAttempts.appendChild(fgAttemptsText);
