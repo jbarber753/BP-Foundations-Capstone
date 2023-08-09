@@ -1,4 +1,5 @@
 require('dotenv').config();
+const bcrypt = require(`bcrypt`);
 const { CONNECTION_STRING } = process.env;
 const Sequelize = require(`sequelize`);
 
@@ -36,9 +37,23 @@ module.exports = {
                 res.status(409).send(`This username is unavailable`)
             }
             else{
-                sequelize.query(`INSERT INTO users (email, username, password) VALUES ('${email}', '${username}', '${password}')`)
-                .then(() => {
-                    res.status(200).send(`Account created!`)
+                const saltRounds = 10;
+                bcrypt.hash(password, saltRounds, (err, hash) => {
+                let newUser = {
+                    email,
+                    username,
+                    passwordHash: hash
+                }
+                if (err){
+                    res.status(400).send(`Problem during hash`)
+                }
+                else{
+                    sequelize.query(`INSERT INTO users (email, username, password) VALUES ('${newUser.email}', '${newUser.username}', '${newUser.passwordHash}')`)
+                    .then(() => {
+                        req.session.userID = newUser.username;
+                        res.status(200).send(`Account created!`)
+                    })
+                }
                 })
             }
         })
@@ -46,14 +61,26 @@ module.exports = {
 
     loginUser: (req, res) => {
         const { username, password } = req.body;
-        sequelize.query(`SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`)
+        sequelize.query(`SELECT * FROM users WHERE username = '${username}'`)
         .then(dbres => {
             if (!dbres[0].length){
                 res.status(401).send(`Invalid credentials`)
             }
             else{
-                req.session.userID = username;
-                res.status(200).send(req.session)
+                bcrypt.compare(password, dbres[0][0].password, (err, result) => {
+                    if (err){
+                        res.status(400).send(`Problem during compare`)
+                      }
+                    else{
+                        if(!result){
+                          res.status(401).send(`Invalid credentials`)
+                        }
+                        else{
+                            req.session.userID = username;
+                            res.status(200).send(req.session)
+                        }
+                    }
+                })
             }
         })
     },

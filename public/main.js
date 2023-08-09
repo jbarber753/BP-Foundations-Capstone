@@ -20,7 +20,6 @@ const checkAuth = () => {
             teamButton.style.display = `none`;
         }
         else{
-            console.log(res.data)
             loginButton.style.display = `none`;
             logoutButton.style.display = `inline`;
             teamButton.style.display = `inline`;
@@ -30,10 +29,8 @@ const checkAuth = () => {
 }
 
 const logout = () => {
-    console.log(`yo`)
     axios.get(`${baseURL}/logout`)
     .then(() => {
-        console.log(`yo yo`)
         location.reload();
     })
 }
