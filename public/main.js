@@ -5,8 +5,38 @@ const teTable = document.getElementById(`te-table`);
 const kTable = document.getElementById(`k-table`);
 const dropDown = document.getElementById(`position-select`);
 const tableHeaders = document.getElementsByTagName(`th`);
+const loginButton = document.getElementById(`login-nav`);
+const logoutButton = document.getElementById(`logout-nav`);
+const teamButton = document.getElementById(`team-nav`);
 
 const baseURL = `http://localhost:4000`;
+
+const checkAuth = () => {
+    axios.get(`${baseURL}/auth`)
+    .then(res => {
+        if (!res.data){
+            loginButton.style.display = `inline`;
+            logoutButton.style.display = `none`;
+            teamButton.style.display = `none`;
+        }
+        else{
+            console.log(res.data)
+            loginButton.style.display = `none`;
+            logoutButton.style.display = `inline`;
+            teamButton.style.display = `inline`;
+            teamButton.textContent = `${res.data}'s Team`
+        }
+    })
+}
+
+const logout = () => {
+    console.log(`yo`)
+    axios.get(`${baseURL}/logout`)
+    .then(() => {
+        console.log(`yo yo`)
+        location.reload();
+    })
+}
 
 const renderTable = () => {
     switch (dropDown.value){
@@ -472,6 +502,7 @@ const handleSort = event => {
     }
 }
 
+checkAuth();
 displayQBs();
 displayRBs();
 displayWRs();
@@ -482,3 +513,4 @@ dropDown.addEventListener(`change`, renderTable);
 for (let i = 0; i < tableHeaders.length; i ++){
     tableHeaders[i].addEventListener(`click`, handleSort);
 }
+logoutButton.addEventListener(`click`, logout);

@@ -1,6 +1,5 @@
 require('dotenv').config();
 const { CONNECTION_STRING } = process.env;
-const { default: axios } = require('axios');
 const Sequelize = require(`sequelize`);
 
 const sequelize = new Sequelize(CONNECTION_STRING, 
@@ -15,12 +14,24 @@ const sequelize = new Sequelize(CONNECTION_STRING,
 )
 
 module.exports = {
+    getAuth: (req, res) => {
+        if (req.session.userID){
+            res.status(200).send(req.session.userID)
+        }
+        else{
+            res.status(200).send(``)
+        }
+    },
+
+    endSession: (req, res) => {
+        req.session.destroy();
+        res.status(200).send(`Logged out`);
+    },
+
     createUser: (req, res) => {
         const { email, username, password } = req.body;
-        console.log(username)
         sequelize.query(`SELECT * FROM users WHERE username = '${username}'`)
         .then(dbres => {
-            console.log(dbres[0])
             if (dbres[0].length){
                 res.status(409).send(`This username is unavailable`)
             }
@@ -29,6 +40,20 @@ module.exports = {
                 .then(() => {
                     res.status(200).send(`Account created!`)
                 })
+            }
+        })
+    },
+
+    loginUser: (req, res) => {
+        const { username, password } = req.body;
+        sequelize.query(`SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`)
+        .then(dbres => {
+            if (!dbres[0].length){
+                res.status(401).send(`Invalid credentials`)
+            }
+            else{
+                req.session.userID = username;
+                res.status(200).send(req.session)
             }
         })
     },

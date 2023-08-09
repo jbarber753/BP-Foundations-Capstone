@@ -7,7 +7,16 @@ const baseURL = `http://localhost:4000`;
 
 const register = body => {
     axios.post(`${baseURL}/register`, body)
-    .then(res => alert(res.data))
+    .then(res => window.location.href = `./index.html`)
+    .catch(error => alert(error.response.data))
+}
+
+const login = body => {
+    axios.post(`${baseURL}/login`, body)
+    .then(res => {
+        console.log(res.data.userID)
+        window.location.href = `./index.html`;
+    })
     .catch(error => alert(error.response.data))
 }
 
@@ -27,6 +36,19 @@ const handleRegister = event => {
     password.value = '';
 }
 
+const handleLogin = event => {
+    event.preventDefault();
+    let username = document.getElementById(`username`);
+    let password = document.getElementById(`password`);
+    let user = {
+        username: username.value,
+        password: password.value
+    }
+    login(user);
+    username.value = '';
+    password.value = '';
+}
+
 const handleSwitch = event => {
     if (event.target.id === `register-switch`){
         registerForm.style.display = `flex`;
@@ -41,3 +63,4 @@ const handleSwitch = event => {
 loginSwitch.addEventListener(`click`, handleSwitch);
 registerSwitch.addEventListener(`click`, handleSwitch);
 registerForm.addEventListener(`submit`, handleRegister);
+loginForm.addEventListener(`submit`, handleLogin);
