@@ -3,10 +3,8 @@ const registerSwitch = document.getElementById(`register-switch`);
 const loginForm = document.getElementById(`login-form`);
 const registerForm = document.getElementById(`register-form`);
 
-const baseURL = `http://localhost:4000`;
-
 const register = body => {
-    axios.post(`${baseURL}/register`, body)
+    axios.post(`/register`, body)
     .then(res => {
         window.location.href = `./index.html`
     })
@@ -14,7 +12,7 @@ const register = body => {
 }
 
 const login = body => {
-    axios.post(`${baseURL}/login`, body)
+    axios.post(`/login`, body)
     .then(res => {
         window.location.href = `./index.html`;
     })
@@ -26,15 +24,25 @@ const handleRegister = event => {
     let email = document.getElementById(`email`);
     let username = document.getElementById(`new-username`);
     let password = document.getElementById(`new-password`);
+    let confirmPassword = document.getElementById(`confirm-password`);
     let newUser = {
         email: email.value,
         username: username.value,
         password: password.value
     }
-    register(newUser);
+    if (password.value !== confirmPassword.value){
+        alert(`Password and Confirm Password must match!`)
+    }
+    else if (!email.value.includes(`@`)){
+       alert(`Must enter a valid email address!`)
+    }
+    else{
+        register(newUser);
+    }
     email.value = '';
     username.value = '';
     password.value = '';
+    confirmPassword.value = '';
 }
 
 const handleLogin = event => {

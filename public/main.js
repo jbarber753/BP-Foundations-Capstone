@@ -14,12 +14,10 @@ const wrHeaders = document.getElementById(`wr-headers`);
 const teHeaders = document.getElementById(`te-headers`);
 const kHeaders = document.getElementById(`k-headers`);
 
-const baseURL = `http://localhost:4000`;
-
 let renderAddButtons = false;
 
 const checkAuth = () => {
-    axios.get(`${baseURL}/auth`)
+    axios.get(`/auth`)
     .then(res => {
         if (!res.data){
             loginButton.style.display = `inline`;
@@ -49,10 +47,10 @@ const setDropDown = () => {
 }
 
 const logout = () => {
-    axios.get(`${baseURL}/logout`)
+    axios.get(`/logout`)
     .then(() => {
         sessionStorage.clear();
-        location.reload();
+        window.location.href = `./login.html`
     })
 }
 
@@ -102,9 +100,9 @@ const displayQBs = (stat, sort) => {
         qbTable.deleteRow(-1);
     }
     if (!stat && !sort){
-        axios.get(`${baseURL}/quarterbacks`)
+        axios.get(`/quarterbacks`)
         .then(res1 => {
-            axios.get(`${baseURL}/claimedqbs`)
+            axios.get(`/claimedqbs`)
             .then(res2 => {
                 let claimedQBs = [];
                 for (let i = 0; i < res2.data.length; i++){
@@ -183,9 +181,9 @@ const displayQBs = (stat, sort) => {
         })
     }
     else{
-        axios.get(`${baseURL}/quarterbacks?stat=${stat}&sort=${sort}`)
+        axios.get(`/quarterbacks?stat=${stat}&sort=${sort}`)
         .then(res1 => {
-            axios.get(`${baseURL}/claimedqbs`)
+            axios.get(`/claimedqbs`)
             .then(res2 => {
                 let claimedQBs = [];
                 for (let i = 0; i < res2.data.length; i++){
@@ -270,9 +268,9 @@ const displayRBs = (stat, sort) => {
         rbTable.deleteRow(-1);
     }
     if (!stat && !sort){
-        axios.get(`${baseURL}/runningbacks`)
+        axios.get(`/runningbacks`)
         .then(res1 => {
-            axios.get(`${baseURL}/claimedrbs`)
+            axios.get(`/claimedrbs`)
             .then(res2 => {
                 let claimedRBs = [];
                 for (let i = 0; i < res2.data.length; i++){
@@ -345,9 +343,9 @@ const displayRBs = (stat, sort) => {
         })
     }
     else{
-        axios.get(`${baseURL}/runningbacks?stat=${stat}&sort=${sort}`)
+        axios.get(`/runningbacks?stat=${stat}&sort=${sort}`)
         .then(res1 => {
-            axios.get(`${baseURL}/claimedrbs`)
+            axios.get(`/claimedrbs`)
             .then(res2 => {
                 let claimedRBs = [];
                 for (let i = 0; i < res2.data.length; i++){
@@ -426,9 +424,9 @@ const displayWRs = (stat, sort) => {
         wrTable.deleteRow(-1);
     }
     if(!stat && !sort){
-        axios.get(`${baseURL}/widereceivers`)
+        axios.get(`/widereceivers`)
         .then(res1 => {
-            axios.get(`${baseURL}/claimedwrs`)
+            axios.get(`/claimedwrs`)
             .then(res2 => {
                 let claimedWRs = [];
                 for (let i = 0; i < res2.data.length; i++){
@@ -501,9 +499,9 @@ const displayWRs = (stat, sort) => {
         })
     }
     else{
-        axios.get(`${baseURL}/widereceivers?stat=${stat}&sort=${sort}`)
+        axios.get(`/widereceivers?stat=${stat}&sort=${sort}`)
         .then(res1 => {
-            axios.get(`${baseURL}/claimedwrs`)
+            axios.get(`/claimedwrs`)
             .then(res2 => {
                 let claimedWRs = [];
                 for (let i = 0; i < res2.data.length; i++){
@@ -582,9 +580,9 @@ const displayTEs = (stat, sort) => {
         teTable.deleteRow(-1);
     }
     if (!stat && !sort){
-        axios.get(`${baseURL}/tightends`)
+        axios.get(`/tightends`)
         .then(res1 => {
-            axios.get(`${baseURL}/claimedtes`)
+            axios.get(`/claimedtes`)
             .then(res2 => {
                 let claimedTEs = [];
                 for (let i = 0; i < res2.data.length; i++){
@@ -657,9 +655,9 @@ const displayTEs = (stat, sort) => {
         })
     }
     else{
-        axios.get(`${baseURL}/tightends?stat=${stat}&sort=${sort}`)
+        axios.get(`/tightends?stat=${stat}&sort=${sort}`)
         .then(res1 => {
-            axios.get(`${baseURL}/claimedtes`)
+            axios.get(`/claimedtes`)
             .then(res2 => {
                 let claimedTEs = [];
                 for (let i = 0; i < res2.data.length; i++){
@@ -738,9 +736,9 @@ const displayKs = (stat, sort) => {
         kTable.deleteRow(-1);
     }
     if (!stat && !sort){
-        axios.get(`${baseURL}/kickers`)
+        axios.get(`/kickers`)
         .then(res1 => {
-            axios.get(`${baseURL}/claimedks`)
+            axios.get(`/claimedks`)
             .then(res2 => {
                 let claimedKs = [];
                 for (let i = 0; i < res2.data.length; i++){
@@ -801,9 +799,9 @@ const displayKs = (stat, sort) => {
         })
     }
     else{
-        axios.get(`${baseURL}/kickers?stat=${stat}&sort=${sort}`)
+        axios.get(`/kickers?stat=${stat}&sort=${sort}`)
         .then(res1 => {
-            axios.get(`${baseURL}/claimedks`)
+            axios.get(`/claimedks`)
             .then(res2 => {
                 let claimedKs = [];
                 for (let i = 0; i < res2.data.length; i++){
@@ -928,26 +926,26 @@ const handleSort = event => {
 }
 
 const addPlayer = event => {
-    axios.get(`${baseURL}/auth`)
+    axios.get(`/auth`)
     .then(res => {
         if (event.target.className === `qb-add-button`){
-            axios.put(`${baseURL}/quarterbacks?user=${res.data.userID}&player=${event.target.id}`)
+            axios.put(`/quarterbacks?user=${res.data.userID}&player=${event.target.id}`)
             .then(res => alert(res.data))
         }
         else if (event.target.className === `rb-add-button`){
-            axios.put(`${baseURL}/runningbacks?user=${res.data.userID}&player=${event.target.id}`)
+            axios.put(`/runningbacks?user=${res.data.userID}&player=${event.target.id}`)
             .then(res => alert(res.data))
         }
         else if (event.target.className === `wr-add-button`){
-            axios.put(`${baseURL}/widereceivers?user=${res.data.userID}&player=${event.target.id}`)
+            axios.put(`/widereceivers?user=${res.data.userID}&player=${event.target.id}`)
             .then(res => alert(res.data))
         }
         else if (event.target.className === `te-add-button`){
-            axios.put(`${baseURL}/tightends?user=${res.data.userID}&player=${event.target.id}`)
+            axios.put(`/tightends?user=${res.data.userID}&player=${event.target.id}`)
             .then(res => alert(res.data))
         }
         else if (event.target.className === `k-add-button`){
-            axios.put(`${baseURL}/kickers?user=${res.data.userID}&player=${event.target.id}`)
+            axios.put(`/kickers?user=${res.data.userID}&player=${event.target.id}`)
             .then(res => alert(res.data))
         }
         location.reload();
