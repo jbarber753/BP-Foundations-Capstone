@@ -85,6 +85,27 @@ td, th{
     padding-left: 50px;
 }
 
+.button-cell{
+    padding-left: 20px;
+}
+
+.qb-remove-button, .rb-remove-button, .wr-remove-button, .te-remove-button, .k-remove-button{
+    background-color: rgb(61, 61, 251);
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: navy;
+    border-image: initial;
+    width: min-content;
+}
+
+.qb-remove-button:hover, .rb-remove-button:hover, .wr-remove-button:hover, .te-remove-button:hover, .k-remove-button:hover{
+    cursor: pointer;
+    background-color: rgb(61, 61, 207)
+}
+
 .filler{
     width: 40px;
     display: block;

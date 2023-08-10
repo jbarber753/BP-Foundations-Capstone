@@ -928,8 +928,6 @@ const handleSort = event => {
 }
 
 const addPlayer = event => {
-    console.log(event.target.id)
-    console.log(event.target.className)
     axios.get(`${baseURL}/auth`)
     .then(res => {
         if (event.target.className === `qb-add-button`){

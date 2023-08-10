@@ -114,11 +114,17 @@ td, th{
     border-style: outset;
     border-color: maroon;
     border-image: initial;
+    width: min-content;
 }
 
 .qb-add-button:hover, .rb-add-button:hover, .wr-add-button:hover, .te-add-button:hover, .k-add-button:hover{
     cursor: pointer;
     background-color: rgb(211, 0, 0);
+}
+
+.already-added{
+    width: min-content;
+    border: 1px solid black;
 }
 
 .name-cell{

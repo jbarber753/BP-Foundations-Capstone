@@ -57,6 +57,14 @@ displayMyQBs = (stat, sort) => {
                     noQBs.style.display = `none`;
                     for (let i = 0; i < res2.data.length; i++){
                         let newRow = qbTable.insertRow();
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        buttonCellContent.textContent = `Drop Player`;
+                        buttonCellContent.classList.add(`qb-remove-button`);
+                        buttonCellContent.id = res2.data[i].id;
+                        buttonCell.appendChild(buttonCellContent);
+                        buttonCellContent.addEventListener(`click`, dropPlayer);
                         let name = newRow.insertCell();
                         name.classList.add(`name-cell`);
                         let filler = newRow.insertCell();
@@ -114,6 +122,14 @@ displayMyQBs = (stat, sort) => {
                     noQBs.style.display = `none`;
                     for (let i = 0; i < res2.data.length; i++){
                         let newRow = qbTable.insertRow();
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        buttonCellContent.textContent = `Drop Player`;
+                        buttonCellContent.classList.add(`qb-remove-button`);
+                        buttonCellContent.id = res2.data[i].id;
+                        buttonCell.appendChild(buttonCellContent);
+                        buttonCellContent.addEventListener(`click`, dropPlayer);
                         let name = newRow.insertCell();
                         name.classList.add(`name-cell`);
                         let filler = newRow.insertCell();
@@ -180,6 +196,14 @@ const displayMyRBs = (stat, sort) => {
                     noRBs.style.display = `none`;
                     for (let i = 0; i < res2.data.length; i++){
                         let newRow = rbTable.insertRow();
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        buttonCellContent.textContent = `Drop Player`;
+                        buttonCellContent.classList.add(`rb-remove-button`);
+                        buttonCellContent.id = res2.data[i].id;
+                        buttonCell.appendChild(buttonCellContent);
+                        buttonCellContent.addEventListener(`click`, dropPlayer);
                         let name = newRow.insertCell();
                         name.classList.add(`name-cell`);
                         let filler = newRow.insertCell();
@@ -224,6 +248,14 @@ const displayMyRBs = (stat, sort) => {
             .then(res2 => {
                 for (let i = 0; i < res2.data.length; i++){
                     let newRow = rbTable.insertRow();
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Drop Player`;
+                    buttonCellContent.classList.add(`rb-remove-button`);
+                    buttonCellContent.id = res2.data[i].id;
+                    buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, dropPlayer);
                     let name = newRow.insertCell();
                     name.classList.add(`name-cell`);
                     let filler = newRow.insertCell();
@@ -283,6 +315,14 @@ const displayMyWRs = (stat, sort) => {
                     noWRs.style.display = `none`;
                     for (let i = 0; i < res2.data.length; i++){
                         let newRow = wrTable.insertRow();
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        buttonCellContent.textContent = `Drop Player`;
+                        buttonCellContent.classList.add(`wr-remove-button`);
+                        buttonCellContent.id = res2.data[i].id;
+                        buttonCell.appendChild(buttonCellContent);
+                        buttonCellContent.addEventListener(`click`, dropPlayer);
                         let name = newRow.insertCell();
                         name.classList.add(`name-cell`);
                         let filler = newRow.insertCell();
@@ -327,6 +367,14 @@ const displayMyWRs = (stat, sort) => {
             .then(res2 => {
                 for (let i = 0; i < res2.data.length; i++){
                     let newRow = wrTable.insertRow();
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Drop Player`;
+                    buttonCellContent.classList.add(`wr-remove-button`);
+                    buttonCellContent.id = res2.data[i].id;
+                    buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, dropPlayer);
                     let name = newRow.insertCell();
                     name.classList.add(`name-cell`);
                     let filler = newRow.insertCell();
@@ -386,6 +434,14 @@ const displayMyTEs = (stat, sort) => {
                     noTEs.style.display = `none`;
                     for (let i = 0; i < res2.data.length; i++){
                         let newRow = teTable.insertRow();
+                        let buttonCell = newRow.insertCell();
+                        buttonCell.classList.add(`button-cell`);
+                        let buttonCellContent = document.createElement(`button`);
+                        buttonCellContent.textContent = `Drop Player`;
+                        buttonCellContent.classList.add(`te-remove-button`);
+                        buttonCellContent.id = res2.data[i].id;
+                        buttonCell.appendChild(buttonCellContent);
+                        buttonCellContent.addEventListener(`click`, dropPlayer);
                         let name = newRow.insertCell();
                         name.classList.add(`name-cell`);
                         let filler = newRow.insertCell();
@@ -430,6 +486,14 @@ const displayMyTEs = (stat, sort) => {
             .then(res2 => {
                 for (let i = 0; i < res2.data.length; i++){
                     let newRow = teTable.insertRow();
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Drop Player`;
+                    buttonCellContent.classList.add(`te-remove-button`);
+                    buttonCellContent.id = res2.data[i].id;
+                    buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, dropPlayer);
                     let name = newRow.insertCell();
                     name.classList.add(`name-cell`);
                     let filler = newRow.insertCell();
@@ -490,6 +554,14 @@ const displayMyKs = (stat, sort) => {
                 }
                 for (let i = 0; i < res2.data.length; i++){
                     let newRow = kTable.insertRow();
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Drop Player`;
+                    buttonCellContent.classList.add(`k-remove-button`);
+                    buttonCellContent.id = res2.data[i].id;
+                    buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, dropPlayer);
                     let name = newRow.insertCell();
                     name.classList.add(`name-cell`);
                     let filler = newRow.insertCell();
@@ -521,6 +593,14 @@ const displayMyKs = (stat, sort) => {
             .then(res2 => {
                 for (let i = 0; i < res2.data.length; i++){
                     let newRow = kTable.insertRow();
+                    let buttonCell = newRow.insertCell();
+                    buttonCell.classList.add(`button-cell`);
+                    let buttonCellContent = document.createElement(`button`);
+                    buttonCellContent.textContent = `Drop Player`;
+                    buttonCellContent.classList.add(`k-remove-button`);
+                    buttonCellContent.id = res2.data[i].id;
+                    buttonCell.appendChild(buttonCellContent);
+                    buttonCellContent.addEventListener(`click`, dropPlayer);
                     let name = newRow.insertCell();
                     name.classList.add(`name-cell`);
                     let filler = newRow.insertCell();
@@ -610,6 +690,33 @@ const yourTeamHandleSort = event => {
             }
             break;
     }
+}
+
+const dropPlayer = event => {
+    axios.get(`${baseURL}/auth`)
+    .then(res => {
+        if (event.target.className === `qb-remove-button`){
+            axios.delete(`${baseURL}/quarterbacks?player=${event.target.id}`)
+            .then(res => alert(res.data))
+        }
+        else if (event.target.className === `rb-remove-button`){
+            axios.delete(`${baseURL}/runningbacks?player=${event.target.id}`)
+            .then(res => alert(res.data))
+        }
+        else if (event.target.className === `wr-remove-button`){
+            axios.delete(`${baseURL}/widereceivers?player=${event.target.id}`)
+            .then(res => alert(res.data))
+        }
+        else if (event.target.className === `te-remove-button`){
+            axios.delete(`${baseURL}/tightends?player=${event.target.id}`)
+            .then(res => alert(res.data))
+        }
+        else if (event.target.className === `k-remove-button`){
+            axios.delete(`${baseURL}/kickers?player=${event.target.id}`)
+            .then(res => alert(res.data))
+        }
+        location.reload();
+    })
 }
 
 checkAuth();
