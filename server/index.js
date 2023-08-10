@@ -3,13 +3,13 @@ const express = require('express');
 const cors = require('cors');
 const session = require(`express-session`);
 const app = express();
-const {SERVER_PORT} = process.env;
+const {SERVER_PORT, SESSION_SECRET} = process.env;
 const { seed } = require('./seed.js');
 const { getAuth, endSession, createUser, loginUser, getUsers, getPlayers, getTeams, getPositions, getQBStats, getRBStats, getWRStats, getTEStats, getKickerStats,addQB, addRB, addWR, addTE, addK, getClaimedQBs, getClaimedRBs, getClaimedWRs, getClaimedTEs, getClaimedKs } = require(`./controller.js`)
 
 app.use(session({
     name: `ML Session`,
-    secret: "shhh",
+    secret: SESSION_SECRET,
     saveUninitialized: false,
     cookie: {httpOnly: false, maxAge: 1000 * 60 * 30},
     resave: false

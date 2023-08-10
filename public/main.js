@@ -25,6 +25,7 @@ const checkAuth = () => {
             loginButton.style.display = `inline`;
             logoutButton.style.display = `none`;
             teamButton.style.display = `none`;
+            sessionStorage.clear();
         }
         else{
             loginButton.style.display = `none`;
@@ -36,9 +37,21 @@ const checkAuth = () => {
     })
 }
 
+const setDropDown = () => {
+    if (sessionStorage.getItem(`dropDown`)){
+        dropDown.value = sessionStorage.getItem(`dropDown`);
+        renderTable();
+    }
+    else{
+        dropDown.value = `qb`;
+        renderTable();
+    }
+}
+
 const logout = () => {
     axios.get(`${baseURL}/logout`)
     .then(() => {
+        sessionStorage.clear();
         location.reload();
     })
 }
@@ -81,6 +94,7 @@ const renderTable = () => {
             kTable.style.display = `table`;
             break;
     }
+    sessionStorage.setItem(`dropDown`, `${dropDown.value}`)
 }
 
 const displayQBs = (stat, sort) => {
@@ -943,6 +957,7 @@ const addPlayer = event => {
 }
 
 checkAuth();
+setDropDown();
 displayQBs();
 displayRBs();
 displayWRs();

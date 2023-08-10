@@ -34,6 +34,7 @@ const checkAuth = () => {
 const logout = () => {
     axios.get(`${baseURL}/logout`)
     .then(() => {
+        sessionStorage.clear();
         window.location.href = `./login.html`;
     })
 }

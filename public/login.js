@@ -7,14 +7,15 @@ const baseURL = `http://localhost:4000`;
 
 const register = body => {
     axios.post(`${baseURL}/register`, body)
-    .then(res => window.location.href = `./index.html`)
+    .then(res => {
+        window.location.href = `./index.html`
+    })
     .catch(error => alert(error.response.data))
 }
 
 const login = body => {
     axios.post(`${baseURL}/login`, body)
     .then(res => {
-        console.log(res.data.userID)
         window.location.href = `./index.html`;
     })
     .catch(error => alert(error.response.data))

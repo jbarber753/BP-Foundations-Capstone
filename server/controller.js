@@ -50,8 +50,12 @@ module.exports = {
                 else{
                     sequelize.query(`INSERT INTO users (email, username, password) VALUES ('${newUser.email}', '${newUser.username}', '${newUser.passwordHash}')`)
                     .then(() => {
-                        req.session.userID = newUser.username;
-                        res.status(200).send(`Account created!`)
+                        sequelize.query(`SELECT * FROM users WHERE username = '${username}'`)
+                        .then(dbres2 => {
+                            req.session.username = dbres2[0][0].username;
+                            req.session.userID = dbres2[0][0].id;
+                            res.status(200).send(req.session)
+                        })
                     })
                 }
                 })
