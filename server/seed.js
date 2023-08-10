@@ -18,13 +18,13 @@ module.exports = {
       sequelize
         .query(
             `
-            DROP TABLE IF EXISTS users;
             DROP TABLE IF EXISTS quarterbacks;
             DROP TABLE IF EXISTS skill_positions;
             DROP TABLE IF EXISTS kickers;
             DROP TABLE IF EXISTS players;
             DROP TABLE IF EXISTS teams;
             DROP TABLE IF EXISTS positions;
+            DROP TABLE IF EXISTS users;
 
             CREATE TABLE users (
               id SERIAL PRIMARY KEY,
@@ -54,11 +54,12 @@ module.exports = {
             CREATE TABLE quarterbacks (
               id INTEGER REFERENCES players(player_id),
               pass_attempts INTEGER,
-              passing_yards INTEGER,
+              completions INTEGER,
+              yards_per_completion FLOAT,
               passing_tds INTEGER,
               interceptions INTEGER,
               rushing_attempts INTEGER,
-              rushing_yards INTEGER,
+              yards_per_carry FLOAT,
               rushing_tds INTEGER,
               user_team INTEGER REFERENCES users(id)
             );
@@ -66,9 +67,10 @@ module.exports = {
             CREATE TABLE skill_positions (
               id INTEGER REFERENCES players(player_id),
               rushing_attempts INTEGER,
-              rushing_yards INTEGER,
+              yards_per_carry FLOAT,
               receiving_targets INTEGER,
-              receiving_yards INTEGER,
+              receptions INTEGER,
+              yards_per_reception FLOAT,
               touchdowns INTEGER,
               user_team INTEGER REFERENCES users(id)
             );
@@ -76,7 +78,9 @@ module.exports = {
             CREATE TABLE kickers (
               id INTEGER REFERENCES players(player_id),
               xp_attempts INTEGER,
+              xp_made INTEGER,
               fg_attempts INTEGER,
+              fg_made INTEGER,
               user_team INTEGER REFERENCES users(id)
             );
 
@@ -129,11 +133,11 @@ module.exports = {
                     }
                     sequelize.query(`
                       SELECT SETSEED(0.753);
-                      INSERT INTO quarterbacks SELECT player_id, FLOOR(RANDOM() * (850 - 170) + 170), FLOOR(RANDOM() * (5500 - 1000) + 1000), FLOOR(RANDOM() * (60 - 20) + 20), FLOOR(RANDOM() * 30), FLOOR(RANDOM() * (160 - 10) + 10), FLOOR(RANDOM() * (1000 - 20) + 20), FLOOR(RANDOM() * 15) FROM players WHERE position = 1;
+                      INSERT INTO quarterbacks SELECT player_id, FLOOR(RANDOM() * (750 - 60) + 60), FLOOR(RANDOM() * (500 - 2) + 2), RANDOM() * (15 - 2) + 2, FLOOR(RANDOM() * (60 - 2) + 2), FLOOR(RANDOM() * 30), FLOOR(RANDOM() * (175 - 15) + 15), RANDOM() * 7, FLOOR(RANDOM() * 15) FROM players WHERE position = 1;
                       SELECT SETSEED(0.476);
-                      INSERT INTO skill_positions SELECT player_id, FLOOR(RANDOM() * (380 - 1) + 2), FLOOR(RANDOM() * 2100), FLOOR(RANDOM() * (210 - 1) + 2), FLOOR(RANDOM() * 2000), FLOOR(RANDOM() * 30) FROM players WHERE position IN (2, 3, 4);
+                      INSERT INTO skill_positions SELECT player_id, FLOOR(RANDOM() * (415 - 2) + 2), RANDOM() * 6.5, FLOOR(RANDOM() * (205 - 2) + 2), FLOOR(RANDOM() * (150 - 2) + 2), RANDOM() * 25, FLOOR(RANDOM() * 30) FROM players WHERE position IN (2, 3, 4);
                       SELECT SETSEED(0.1453);
-                      INSERT INTO kickers SELECT player_id, FLOOR(RANDOM() * (85-10) + 10), FLOOR(RANDOM() * (50-15) +15) FROM players WHERE position = 5;
+                      INSERT INTO kickers SELECT player_id, FLOOR(RANDOM() * 50), FLOOR(RANDOM() * (50 - 43) + 43), FLOOR(RANDOM() * 40), FLOOR(RANDOM() * (40 - 30) + 30) FROM players WHERE position = 5;
                     `)
                     console.log(`Players seeded!`)
                 })

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>@import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap');</style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="myteam.css">
     <title>My Team</title>
 </head>
@@ -12,10 +13,324 @@
         <nav>
             <a href="index.html">2022 Stats</a>
             <a id="team-nav">Your Team</a>
-            <a href="login.html" id="login-nav">Log In</a>
             <a id="logout-nav">Log Out</a>
         </nav>
     </header>
+    <div id="table-wrapper">
+        <h1>Quarterbacks</h1>
+        <table id="qb-table">
+            <thead>
+                <tr id="qb-headers">
+                    <th></th>
+                    <th class="filler"></th>
+                    <th>Team</th>
+                    <th class="inactive" id="pass_attempts">
+                        <div class="table-label">
+                            <span>Pass Attempts</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="completions">
+                        <div class="table-label">
+                            <span>Completions</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="passing_yards">
+                        <div class="table-label">
+                            <span>Passing Yards</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="yards_per_completion">
+                        <div class="table-label">
+                            <span>Yards Per Completion</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="passing_tds">
+                        <div class="table-label">
+                            <span>Passing Touchdowns</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="interceptions">
+                        <div class="table-label">
+                            <span>Interceptions</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="rushing_attempts">
+                        <div class="table-label">
+                            <span>Rushing Attempts</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="rushing_yards">
+                        <div class="table-label">
+                            <span>Rushing Yards</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="yards_per_carry">
+                        <div class="table-label">
+                            <span>Yards Per Carry</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="rushing_tds">
+                        <div class="table-label">
+                            <span>Rushing Touchdowns</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="fantasy_points">
+                        <div class="table-label">
+                            <span>Fantasy Points</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+        <h2 id="no-qbs">You currently have no QBs on your roster!</h2>
+        <h1>Running Backs</h1>
+        <table id="rb-table">
+            <thead>
+                <tr id="rb-headers">
+                    <th></th>
+                    <th class="filler"></th>
+                    <th>Team</th>
+                    <th class="inactive" id="rushing_attempts">
+                        <div class="table-label">
+                            <span>Rushing Attempts</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="rushing_yards">
+                        <div class="table-label">
+                            <span>Rushing Yards</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="yards_per_carry">
+                        <div class="table-label">
+                            <span>Yards Per Carry</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="receiving_targets">
+                        <div class="table-label">
+                            <span>Receiving Targets</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="receptions">
+                        <div class="table-label">
+                            <span>Receptions</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="receiving_yards">
+                        <div class="table-label">
+                            <span>Receiving Yards</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="yards_per_reception">
+                        <div class="table-label">
+                            <span>Yards Per Reception</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="touchdowns">
+                        <div class="table-label">
+                            <span>Touchdowns</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="fantasy_points">
+                        <div class="table-label">
+                            <span>Fantasy Points</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+        <h2 id="no-rbs">You currently have no RBs on your roster!</h2>
+        <h1>Wide Receivers</h1>
+        <table id="wr-table">
+            <thead>
+                <tr id="wr-headers">
+                    <th></th>
+                    <th class="filler"></th>
+                    <th>Team</th>
+                    <th class="inactive" id="receiving_targets">
+                        <div class="table-label">
+                            <span>Receiving Targets</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="receptions">
+                        <div class="table-label">
+                            <span>Receptions</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="receiving_yards">
+                        <div class="table-label">
+                            <span>Receiving Yards</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="yards_per_reception">
+                        <div class="table-label">
+                            <span>Yards Per Reception</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="rushing_attempts">
+                        <div class="table-label">
+                            <span>Rushing Attempts</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="rushing_yards">
+                        <div class="table-label">
+                            <span>Rushing Yards</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="yards_per_carry">
+                        <div class="table-label">
+                            <span>Yards Per Carry</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="touchdowns">
+                        <div class="table-label">
+                            <span>Touchdowns</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="fantasy_points">
+                        <div class="table-label">
+                            <span>Fantasy Points</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+        <h2 id="no-wrs">You currently have no WRs on your roster!</h2>
+        <h1>Tight Ends</h1>
+        <table id="te-table">
+            <thead>
+                <tr id="te-headers">
+                    <th></th>
+                    <th class="filler"></th>
+                    <th>Team</th>
+                    <th class="inactive" id="receiving_targets">
+                        <div class="table-label">
+                            <span>Receiving Targets</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="receptions">
+                        <div class="table-label">
+                            <span>Receptions</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="receiving_yards">
+                        <div class="table-label">
+                            <span>Receiving Yards</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="yards_per_reception">
+                        <div class="table-label">
+                            <span>Yards Per Reception</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="rushing_attempts">
+                        <div class="table-label">
+                            <span>Rushing Attempts</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="rushing_yards">
+                        <div class="table-label">
+                            <span>Rushing Yards</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="yards_per_carry">
+                        <div class="table-label">
+                            <span>Yards Per Carry</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="touchdowns">
+                        <div class="table-label">
+                            <span>Touchdowns</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="fantasy_points">
+                        <div class="table-label">
+                            <span>Fantasy Points</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+        <h2 id="no-tes">You currently have no TEs on your roster!</h2>
+        <h1>Kickers</h1>
+        <table id="k-table">
+            <thead>
+                <tr id="k-headers">
+                    <th></th>
+                    <th class="filler"></th>
+                    <th>Team</th>
+                    <th class="inactive" id="xp_attempts">
+                        <div class="table-label">
+                            <span>Extra Point Attempts</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="xp_made">
+                        <div class="table-label">
+                            <span>Extra Points Made</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="fg_attempts">
+                        <div class="table-label">
+                            <span>Field Goal Attempts</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="fg_made">
+                        <div class="table-label">
+                            <span>Field Goals Made</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                    <th class="inactive" id="fantasy_points">
+                        <div class="table-label">
+                            <span>Fantasy Points</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+        <h2 id="no-ks">You currently have no Ks on your roster!</h2>
+    </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="myteam.js"></script>
 </body>

@@ -1,3 +1,12 @@
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48;
+    visibility: hidden;
+  }
+
 body{
     margin: 0;
 }
@@ -25,11 +34,84 @@ a{
     color: white;
 }
 
-#logout-nav{
-    display: none;
-}
-
 a:hover{
     cursor: pointer;
     text-decoration: underline;
+}
+
+h1{
+    margin-left: 20px;
+}
+
+#table-wrapper{
+    width: 100;
+    margin: auto;
+    overflow-x: scroll;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+tr {
+    border-bottom: 1pt solid lightgray;
+}
+
+tr:nth-child(even){
+    background-color: rgb(255, 227, 227);
+}
+
+td{
+    font-size: 18px;
+    padding: 10px 0;
+}
+
+th{
+    font-size: 24px;
+}
+
+.table-label{
+    display: flex;
+    margin: 0 20px;
+}
+
+td, th{
+    text-align: center;
+}
+
+.name-cell{
+    padding-left: 50px;
+}
+
+.filler{
+    width: 40px;
+    display: block;
+}
+
+.inactive:hover{
+    cursor: pointer;
+    .material-symbols-outlined{visibility: visible;}
+}
+
+.active:hover{
+    cursor: pointer;
+}
+
+.active .material-symbols-outlined{
+    visibility: visible;
+}
+
+#qb-table, #rb-table, #wr-table, #te-table, #k-table{
+    margin-bottom: 50px;
+}
+
+#no-qbs, #no-rbs, #no-wrs, #no-tes, #no-ks{
+    display: none;
+    margin-left: 30px;
+    color: maroon;
+}
+
+#no-ks{
+    margin-bottom: 50px;
 }
